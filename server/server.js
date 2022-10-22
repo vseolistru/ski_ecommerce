@@ -8,6 +8,8 @@ import {fileURLToPath} from "url";
 import {dirname} from "path";
 import path from "path";
 import userRouter from "./routes/userRouter.js";
+import categoryRouter from "./routes/categoryRouter.js";
+import brandRoute from "./routes/brandRoutes.js";
 
 dotenv.config();
 
@@ -24,6 +26,8 @@ app.use(cors());
 app.use(fileUpload({useTempFiles: true}));
 
 app.use('/api/users', userRouter);
+app.use('/api/category', categoryRouter);
+app.use('/api/brand', brandRoute);
 
 
 app.get('/', (req, res)=>{

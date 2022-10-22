@@ -87,6 +87,49 @@ class UserControllers {
         }
     }
 
+    async login (req, res){
+        try {
+            const {email, password} = req.body
+            const user = await User.findOne({email})
+            if (!user){
+                return res.status(401).json(`user ${email} does not exist`)
+            }
+            let comparePassword = bcrypt.compareSync(password, user.password)
+            if (!comparePassword){
+                return res.status(401).json(`user pass is a wrong`)
+            }
+            const token = generateJwt(user._id, user.name, user.email, user.role)
+            const refreshtoken = generateRefresh(user._id, user.name, user.email, user.role)
+            res.cookie('refreshtoken', refreshtoken, { httpOnly: true , path: '/api/users/refreshtoken'})
+
+            return res.json({...user._doc, token, refreshtoken});
+        }catch (e) {
+            res.status(500).json({msg: e.msg})
+        }
+    }
+
+    async logout (req, res){
+        try {
+            res.clearCookie('refreshtoken', {path: '/api/users/refreshtoken'});
+            return res.json({msg: 'Logged out'})
+        }
+        catch (e) {
+            res.status(500).json({msg: e.msg})
+        }
+
+    }
+    async getOne(req, res) {
+        try {
+            const user = await User.findById({_id: req.params.id}).select('-password')
+            if (!user) {
+                return res.status(404).json('User is not found')
+            }
+            return res.json({user})
+        } catch (e) {
+            res.status(500).json({msg: e.msg})
+        }
+    }
+
 }
 
 export default new UserControllers();
