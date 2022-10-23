@@ -85,7 +85,7 @@ class ProdControllers {
             else{
                 products = await Product.find();
             }
-            return res.json(products).status(200)
+            return res.json({products}).status(200)
         } catch (e) {
             res.status(501).json('Не выполнено')
         }

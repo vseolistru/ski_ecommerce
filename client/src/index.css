@@ -30,3 +30,6 @@ button {
   background: transparent;
   cursor: pointer;
 }
+/*header*/
+
+@import url("./components/headers/header.css");

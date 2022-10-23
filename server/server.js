@@ -20,10 +20,11 @@ const PORT = process.env.PORT || 5000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+app.use(cors());
 app.use(express.static(path.resolve(__dirname, 'static')))
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors());
+app.use(express.urlencoded({extended: true}))
 app.use(fileUpload({useTempFiles: true}));
 
 app.use('/api/users', userRouter);
