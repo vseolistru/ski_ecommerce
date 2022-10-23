@@ -5,13 +5,13 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-
+const sep = new RegExp("^( )")
 class ProdControllers {
 
      async create(req, res) {
          try {
-             const {title, catId, brandId, description, price, size, slug, productId} = req.body;
-             if (!title || !catId || !brandId || !description || !price || !size || !slug || !productId) {
+             const {title, catId, brandId, description, price, size, productId} = req.body;
+             if (!title || !catId || !brandId || !description || !price || !size || !productId) {
                  return res.status(403).json('Value of product`s field cannot be empty')
              }
              const {img1, img2, img3} = req.files
@@ -22,13 +22,13 @@ class ProdControllers {
              await img2.mv(path.resolve(__dirname, '..', 'static', img2.name));
              await img3.mv(path.resolve(__dirname, '..', 'static', img3.name));
              const product = await Product.create({
-                 title,
+                 title:title.toLowerCase(),
                  catId,
                  brandId,
                  description,
                  price,
                  size,
-                 slug,
+                 slug:title.toLowerCase().replace(/ /g, '-'),
                  img1:img1.name,
                  img2:img2.name,
                  img3:img3.name,

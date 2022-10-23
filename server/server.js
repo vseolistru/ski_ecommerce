@@ -10,7 +10,6 @@ import path from "path";
 import userRouter from "./routes/userRouter.js";
 import categoryRouter from "./routes/categoryRouter.js";
 import brandRoute from "./routes/brandRoutes.js";
-import uploadRouter from "./routes/upload.js";
 import productRouter from "./routes/productRouter.js";
 
 dotenv.config();
