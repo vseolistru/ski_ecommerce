@@ -17,6 +17,7 @@ code{
   margin: 0 auto;
   padding: 0 20px;
   box-shadow: 0 0 35px #eee;
+
 }
 a{
   text-decoration: none;
@@ -30,6 +31,13 @@ button {
   background: transparent;
   cursor: pointer;
 }
-/*header*/
 
+/*header*/
 @import url("./components/headers/header.css");
+
+/*Products*/
+@import url("./components/products/product.css");
+
+/* Detail */
+@import url("./components/detail/detail.css");
+

@@ -1,0 +1,10 @@
+.products {
+    width: 100%;
+    display: flex;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    justify-items: center;
+    margin: 20px 0;
+}
+
+/*Productitems*/
+@import url("../utils/productitem/productitem.css");

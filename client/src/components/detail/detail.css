@@ -1,0 +1,83 @@
+.detail {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 10px 10px;
+}
+
+.detail img {
+    max-width: 500px;
+    margin-right: 10px;
+    padding: 10px 10px;
+    display: block;
+}
+
+.box-detail {
+    max-width: 600px;
+    margin-left: 20px;
+}
+.box-detail .row {
+    display: flex;
+    justify-content: space-between;
+}
+.box-detail span {
+    font-weight: bold;
+    color: #831129;
+    padding: 10px 10px;
+    margin-bottom: 20px;
+}
+.box-detail form {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.box-detail form label {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    height: 51px;
+    background: #210506;
+    border: solid 1px #b5b5b5;
+    cursor: pointer;
+    margin-right: 8px;
+    color: #dddddd;
+    font-weight: bold;
+    margin-left: 5px;
+    padding: 9px 18px;
+}
+
+.box-detail form input{
+    /*display: none;*/
+    background-color: #1f4f3b;
+}
+.box-detail_radio:checked{
+    background: #937c6f;
+    color: #FFFFFF;
+}
+
+.box-detail h1 {
+    display: flex;
+    text-transform: uppercase;
+    color: #2f3264;
+}
+.box-detail p {
+    font-size: larger;
+    color: #1e1f36;
+}
+.box-detail .cart {
+    background-color: #164d32;
+    color: #dddddd;
+    margin-top: 10px;
+    padding: 10px 25px;
+    display: inline-block;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
