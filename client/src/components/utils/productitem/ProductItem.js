@@ -1,6 +1,7 @@
 import React from 'react';
 import {Helmet} from "react-helmet-async";
-import {Link} from "react-router-dom";
+import BtnRender from "./BtnRender";
+
 
 const ProductItem = ({product}) => {
     return (
@@ -15,14 +16,7 @@ const ProductItem = ({product}) => {
                 <span>{product.price}p.</span>
                 <p>{product.description}</p>
             </div>
-            <div className="row_btn">
-                <Link to="#" id ="btn_buy">
-                    Buy
-                </Link>
-                <Link to={`/${product.slug}`} id ="btn_view">
-                    View
-                </Link>
-            </div>
+            <BtnRender product={product}/>
         </div>
     );
 };

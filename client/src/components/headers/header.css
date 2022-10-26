@@ -1,5 +1,5 @@
 header {
-    min-height: 70px;
+    min-height: 190px;
     width: 100%;
     overflow: hidden;
     display: flex;
@@ -14,7 +14,8 @@ header .logo {
 
 header a {
     text-transform: uppercase;
-    color: #555;
+    color: #2c2c2c;
+    font-weight: bold;
 }
 header ul li {
     display: inline-block;
@@ -40,4 +41,41 @@ header ul li:hover {
     right: -5px;
     padding: 5px 7px;
     font-size: 10px;
+}
+.user-name {
+    text-transform: capitalize;
+    letter-spacing: 2px;
+}
+.user-name span{
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #000580;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    padding: 2px 7px;
+    z-index: 1;
+    align-items: center;
+    font-weight: bold;
+
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown-content a {
+    display: flex;
+    margin-top: 3px;
+    color:  #000580;
+    text-decoration: underline;
+
+}
+.dropdown-content hr {
+    margin-top: 1px;
 }

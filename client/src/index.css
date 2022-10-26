@@ -41,3 +41,7 @@ button {
 /* Detail */
 @import url("./components/detail/detail.css");
 
+/*login-register*/
+
+@import url("./components/auth/login.css");
+

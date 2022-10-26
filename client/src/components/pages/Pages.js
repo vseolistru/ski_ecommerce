@@ -6,6 +6,7 @@ import Register from "../auth/Register";
 import Cart from "../cart/Cart";
 import NotFound from "../utils/NotFound";
 import Detail from "../detail/Detail";
+import {ToastContainer} from "react-toastify";
 
 
 
@@ -13,6 +14,7 @@ import Detail from "../detail/Detail";
 const Pages = () => {
     return (
         <Routes>
+
             <Route path ='/' exact element={<Products/>}/>
             <Route path ='/:slug' exact element={<Detail/>}/>
             <Route path ='/login' exact element={<Login/>}/>

@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import {State} from "../../Store";
 import ProductItem from "../utils/productitem/ProductItem";
+import Loading from "../utils/loading/loading";
 
 
 const Products = () => {
@@ -8,13 +9,16 @@ const Products = () => {
     const [products] = state.ProductsAPI.products
 
     return (
-        <div className="products">
-            {
-                products.map(product => {
-                    return <ProductItem key={product.slug} product={product}/>
-                })
-            }
-        </div>
+        <>
+            <div className="products">
+                {
+                    products.map(product => {
+                        return <ProductItem key={product.slug} product={product}/>
+                    })
+                }
+            </div>
+           {products.length ===0 && <Loading/>}
+            </>
     );
 };
 

@@ -8,6 +8,8 @@ import {Link} from "react-router-dom";
 
 const Header = () => {
     const value = useContext(State)
+    const store = JSON.parse(localStorage.getItem('Ski&bikeLogin'))
+
     return (
       <header>
           <div className="menu">
@@ -18,10 +20,18 @@ const Header = () => {
                   <Link to={'/'}>Ski & Bike store</Link>
               </h1>
           </div>
-
           <ul>
-              <li><Link to={'/'}>Products</Link></li>
-              <li><Link to={'/login'}>Login * Register</Link></li>
+              <li><Link to={'/'}>Products</Link>
+              </li>
+                  {store ? <li className="user-name dropdown">user:
+                          <span>{store.name}</span>
+                          <div className="dropdown-content">
+                              <Link to={"/"}>Profile</Link>
+                              <Link to={"/"}>History</Link><hr/>
+                              <Link to={"/"}>Logout</Link>
+                          </div>
+              </li>
+                  :<li><Link to={'/login'}>Login * Register</Link></li> }
               <li><img src={Close} alt='' width="30" className="menu"/> </li>
 
           </ul>
