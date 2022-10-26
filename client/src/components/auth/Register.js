@@ -3,7 +3,7 @@ import {Helmet} from "react-helmet-async";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import {toast} from "react-toastify";
-import {getError} from "../utils/error";
+
 
 const Register = () => {
     const [email, setEmail] = useState('');
@@ -18,7 +18,7 @@ const Register = () => {
         if (password === confirmpassword) {
             const {data} = await axios.post('/api/users/', {name: username, email, password});
             setTimeout(() => {
-                const {_id, isActivated, role, ...toStore} = data
+                const {isActivated, role, ...toStore} = data
                 localStorage.setItem('Ski&bikeLogin', JSON.stringify(toStore));
                 toast.success("register...")
                 window.location.href = '/';
@@ -31,11 +31,11 @@ const Register = () => {
         }
     }
 
-    // useEffect(()=>{
-    //     if (store) {
-    //         window.location.href = '/';
-    //     }
-    // }, [store])
+    useEffect(()=>{
+        if (store) {
+            window.location.href = '/';
+        }
+    }, [store])
 
     return (
         <div className="login-page">

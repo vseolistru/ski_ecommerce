@@ -5,18 +5,18 @@
 .loader{
     width: 300px;
     height: 300px;
-    margin: auto;
+    margin: 100px auto;
 }
 .loader div {
-    width: calc(100% - 15px);
-    height: calc(100%- 15px);
+    width: calc(100% - 35px);
+    height: calc(100% - 35px);
     border: 2px solid #fff;
-    border-top: 2px solid crimson;
+    border-top: 14px solid #ff5800;
     border-radius: 50%;
-    animation: rotate 10s linear infinite alternate-reverse;
+    animation: rotate 5s linear infinite alternate-reverse;
 }
 
 @keyframes rotate {
-    50%{transform: rotate(80deg);}
+    50%{transform: rotate(120deg);}
     100%{transform: rotate(360deg);}
 }

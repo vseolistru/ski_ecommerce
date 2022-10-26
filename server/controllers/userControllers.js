@@ -43,7 +43,7 @@ class UserControllers {
             const user = await User.create({email, name, activationLink, role, password: hashPassword});
             const token = generateJwt(user._id, user.name, user.email, user.role)
             const refreshtoken = generateRefresh(user._id, user.name, user.email, user.role)
-            res.cookie('refreshtoken', refreshtoken, { httpOnly: true , path: '/api/users/refreshtoken'})
+            res.cookie('refreshtoken', refreshtoken, { httpOnly: true })
 
             return res.json({...user._doc, token});
         }
@@ -65,11 +65,11 @@ class UserControllers {
                 const token = generateJwt(user._id, user.name, user.email, user.role)
                 res.json({user, token})
             })
-            res.json({rfToken})
-        }
-         catch (e) {
-             res.status(500).json({message: e.message})
-        }
+            //res.json({rfToken})
+       }
+        catch (e) {
+            res.status(500).json({message: e.message})
+       }
     }
 
     async activate (req, res){
@@ -101,7 +101,7 @@ class UserControllers {
             }
             const token = generateJwt(user._id, user.name, user.email, user.role)
             const refreshtoken = generateRefresh(user._id, user.name, user.email, user.role)
-            res.cookie('refreshtoken', refreshtoken, { httpOnly: true , path: '/api/users/refreshtoken'})
+            res.cookie('refreshtoken', refreshtoken, { httpOnly: true })
 
             return res.json({...user._doc, token});
         }catch (e) {
@@ -111,7 +111,7 @@ class UserControllers {
 
     async logout (req, res){
         try {
-            res.clearCookie('refreshtoken', {path: '/api/users/refreshtoken'});
+            res.clearCookie('refreshtoken');
             return res.json({message: 'Logged out'})
         }
         catch (e) {

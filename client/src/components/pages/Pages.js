@@ -6,7 +6,7 @@ import Register from "../auth/Register";
 import Cart from "../cart/Cart";
 import NotFound from "../utils/NotFound";
 import Detail from "../detail/Detail";
-import {ToastContainer} from "react-toastify";
+
 
 
 

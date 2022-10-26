@@ -1,16 +1,32 @@
-import React, {createContext, useState} from 'react';
+import React, {createContext, useCallback, useState} from 'react';
 import ProductsAPI from "./api/ProductsAPI";
+import UserAPI from "./api/UserAPI";
+import axios from "axios";
 
 export const State = createContext();
 
 
 const StoreProvider = ({children}) => {
     const [token, setToken] = useState(false);
+    const store = JSON.parse(localStorage.getItem('Ski&bikeLogin'))
+
+    const refreshToken = async () =>{
+        if (store) {
+         const response = await axios.get('/api/users/refreshtoken')
+         setToken(response.data.token)
+        }
+    }
 
     const state = {
         token: [token, setToken],
-        ProductsAPI: ProductsAPI()
+        ProductsAPI: ProductsAPI(),
+        userApi: UserAPI(token),
     }
+
+    useCallback(()=>{
+        refreshToken()
+
+    },[refreshToken])
 
     return (
         <State.Provider value={state}>

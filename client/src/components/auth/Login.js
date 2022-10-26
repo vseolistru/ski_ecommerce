@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import axios from "axios";
 import {getError} from "../utils/error";
 import {toast} from "react-toastify";
@@ -19,7 +19,7 @@ const Login = () => {
         try{
             const {data} = await axios.post('/api/users/login',{...user})
             setTimeout(() => toast("login..."), 2000);
-            const {_id, isActivated, role, ...toStore } = data
+            const {isActivated, role, token, ...toStore } = data
             localStorage.setItem('Ski&bikeLogin', JSON.stringify(toStore));
             window.location.href = '/';
         }
@@ -28,11 +28,11 @@ const Login = () => {
         }
     }
 
-    // useEffect(()=>{
-    //     if (store) {
-    //         window.location.href = '/';
-    //     }
-    // }, [store])
+    useEffect(()=>{
+        if (store) {
+            window.location.href = '/';
+        }
+    }, [store])
     
     return (
         <div className="login-page">

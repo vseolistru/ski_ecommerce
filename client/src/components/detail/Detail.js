@@ -16,7 +16,6 @@ const Detail = () => {
     const [selectedSizes, setSelectedSizes] = useState('')
 
     useEffect(()=>{
-        console.log('re_render')
         if (params.slug) {
             products.forEach(product => {
                 if(product.slug === slug){
@@ -25,7 +24,7 @@ const Detail = () => {
                 }
             })
         }
-    },[params.slug, products])
+    },[params.slug, products, slug])
 
     const data = [
         {image: detail.img1, caption: detail.slug},
