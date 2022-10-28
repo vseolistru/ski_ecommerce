@@ -63,7 +63,7 @@ class UserControllers {
                     return res.status(400).json({message:"Please logging or register"});
                 }
                 const token = generateJwt(user._id, user.name, user.email, user.role)
-                res.json({user, token})
+                res.json({user, token}).status(200)
             })
             //res.json({rfToken})
        }
@@ -118,17 +118,35 @@ class UserControllers {
             res.status(500).json({message: e.message})
         }
     }
+
     async getOne(req, res) {
         try {
             const user = await User.findById({_id: req.params.id}).select('-password')
             if (!user) {
                 return res.status(404).json({message:'User is not found'})
             }
-            return res.json({user})
+            return res.json({...user._doc,})
         } catch (e) {
             res.status(500).json({msg: e.msg})
         }
     }
-}
 
+    async addToCart(req, res) {
+        try{
+            const {cart} = req.body
+            const user = await User.findById({_id: req.params.id})
+            if(user) {
+                await User.findByIdAndUpdate({_id: req.params.id}, {cart})
+                res.status(200).json({user})
+            }
+            else {
+                return res.status(404).json({message:'User is not found'})
+            }
+        }catch (e) {
+            res.status(500).json({message: e.message})
+        }
+    }
+
+}
+//({message: 'Cart added to user'})
 export default new UserControllers();

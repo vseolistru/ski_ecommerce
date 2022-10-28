@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {State} from "../../Store";
 import Menu from "./icon/menu.svg";
 import Close from "./icon/close.svg";
@@ -10,7 +10,16 @@ import axios from "axios";
 const Header = () => {
     const value = useContext(State)
     const store = JSON.parse(localStorage.getItem('Ski&bikeLogin'))
+    const [cart, setCart] = useState(0)
     const [isAdmin, setIsAdmin] = value.userApi.isAdmin
+
+
+    useEffect(()=>{
+        if(store) {
+            setCart(store.cart)
+        }
+    },[])
+
 
     const signOutHandler = async () => {
         await axios.post('/api/users/logout')
@@ -18,7 +27,6 @@ const Header = () => {
         setIsAdmin(false)
         window.location.href = '/login';
     }
-
 
     return (
         <header>
@@ -42,7 +50,7 @@ const Header = () => {
                         <li className="user-name dropdown">
                             admin: <span>{store.name}</span>
                             <div className="dropdown-content">
-                                <Link to="#signout" onClick={signOutHandler}>Logout</Link>
+                                <Link to="/login" onClick={signOutHandler}>Logout</Link>
                             </div>
                         </li>
                     </>)
@@ -64,7 +72,7 @@ const Header = () => {
             </ul>
             {isAdmin ? <Link to={"/"}>Orders</Link>
             : <div className="cart-icon">
-                <span>0</span>
+                    {! cart ? null : <span>{cart.length}</span>}
                 <Link to={'/cart'}>
                     <img src ={Cart} alt='' width='30'/>
                 </Link>

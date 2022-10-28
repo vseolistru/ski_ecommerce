@@ -1,4 +1,4 @@
-import React, {createContext, useCallback, useState} from 'react';
+import React, {createContext, useEffect, useState} from 'react';
 import ProductsAPI from "./api/ProductsAPI";
 import UserAPI from "./api/UserAPI";
 import axios from "axios";
@@ -23,7 +23,7 @@ const StoreProvider = ({children}) => {
         userApi: UserAPI(token),
     }
 
-    useCallback(()=>{
+    useEffect(()=>{
         refreshToken()
 
     },[refreshToken])

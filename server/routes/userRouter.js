@@ -10,5 +10,7 @@ userRoute.get('/activate/:link', userControllers.activate);
 userRoute.get('/refreshtoken', userControllers.refreshtoken);
 userRoute.post('/logout', userControllers.logout);
 userRoute.get('/infor/:id', Auth, userControllers.getOne);
+userRoute.patch('/addcart/:id', userControllers.addToCart)
+
 
 export default userRoute;
