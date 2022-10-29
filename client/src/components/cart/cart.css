@@ -39,20 +39,20 @@
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
-
-
 }
+
 .total h3 {
-    color: #050503;
+    color: #1f4f3b;
     margin-top: 10px;
     margin-left: 30px;
+    font-size: x-large;
 }
 .to-pay {
     display: table-row;
 }
 .to-pay p {
     color: #09100e;
-    font-size: large;
+    font-size: 22px;
     font-weight: bold;
     text-decoration: underline;
 }

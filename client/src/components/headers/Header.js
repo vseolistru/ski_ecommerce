@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, { useContext, useEffect} from 'react';
 import {State} from "../../Store";
 import Menu from "./icon/menu.svg";
 import Close from "./icon/close.svg";
@@ -10,16 +10,14 @@ import axios from "axios";
 const Header = () => {
     const value = useContext(State)
     const store = JSON.parse(localStorage.getItem('Ski&bikeLogin'))
-    const [cart, setCart] = useState(0)
+    const [cart, setCart] = value.userApi.cart;
     const [isAdmin, setIsAdmin] = value.userApi.isAdmin
-
 
     useEffect(()=>{
         if(store) {
             setCart(store.cart)
         }
     },[])
-
 
     const signOutHandler = async () => {
         await axios.post('/api/users/logout')
