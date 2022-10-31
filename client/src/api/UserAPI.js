@@ -52,7 +52,9 @@ const UserAPI = (token) => {
                 const {isActivated, role, ...toStore } = data
                 localStorage.setItem('Ski&bikeLogin', JSON.stringify(toStore));
                 toast.success("Product has been added to cart")
-
+            }
+            else {
+                toast.error("This product is exist in cart")
             }
         }
         else {

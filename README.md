@@ -7,7 +7,15 @@
 ##Client
 
 `npm i react-router-dom axios react-helmet-async react-paypal-express-checkout`
-`npm i react-carousel-minimal `
+`npm i react-carousel-minimal`
+
+`npm install react-paypal-js`
+`npm i react-stripe-checkout
+`
+
+
+
+
 
 
 

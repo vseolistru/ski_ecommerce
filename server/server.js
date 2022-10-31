@@ -11,6 +11,8 @@ import userRouter from "./routes/userRouter.js";
 import categoryRouter from "./routes/categoryRouter.js";
 import brandRoute from "./routes/brandRoutes.js";
 import productRouter from "./routes/productRouter.js";
+import stripeRoute from "./routes/stripe.js";
+import orderRoute from "./routes/orderRoutes.js";
 
 dotenv.config();
 
@@ -27,10 +29,14 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 app.use(fileUpload({useTempFiles: true}));
 
+
+
 app.use('/api/users', userRouter);
 app.use('/api/category', categoryRouter);
 app.use('/api/brand', brandRoute);
 app.use('/api/products', productRouter);
+app.use('/api/checkout', stripeRoute);
+app.use('/api/orders', orderRoute)
 
 
 app.get('/', (req, res)=>{
