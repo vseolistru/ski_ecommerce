@@ -29,6 +29,23 @@ class MailService {
             `
         })
     }
+
+    async sendRestorePassword(to, link){
+        await this.transporter.sendMail({
+            from: process.env.SMTP_USER,
+            to,
+            subject: "Восстановление пароля на"+ process.env.API_URL,
+            text: '',
+            html: `
+                <div>
+                <h1>Для восстановления перейдите по ссылке</h1>
+                <p>Ссылка будет активна 5 минут</p>
+                <a href="${link}">${link}</a>                
+                </div>                
+            `
+        })
+    }
+
 }
 
 export default new MailService()
