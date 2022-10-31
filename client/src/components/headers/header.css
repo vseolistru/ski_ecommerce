@@ -10,6 +10,7 @@ header {
 }
 header .logo {
     flex: 1;
+    margin-bottom: 15px;
 }
 
 header a {
@@ -21,9 +22,11 @@ header ul li {
     display: inline-block;
     opacity: 0.7;
     padding: 0 20px;
+    margin-bottom: 50px;
 }
 header ul li:hover {
     opacity: 1;
+
 }
 .menu {
     display: none;
@@ -31,6 +34,7 @@ header ul li:hover {
 .cart-icon{
     position: relative;
     margin-right: 20px;
+    margin-bottom: 15px;
 }
 .cart-icon span {
     background: crimson;

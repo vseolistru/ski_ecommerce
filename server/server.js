@@ -13,6 +13,7 @@ import brandRoute from "./routes/brandRoutes.js";
 import productRouter from "./routes/productRouter.js";
 import stripeRoute from "./routes/stripe.js";
 import orderRoute from "./routes/orderRoutes.js";
+import restoreRoute from "./routes/restoreRouter.js";
 
 dotenv.config();
 
@@ -37,6 +38,7 @@ app.use('/api/brand', brandRoute);
 app.use('/api/products', productRouter);
 app.use('/api/checkout', stripeRoute);
 app.use('/api/orders', orderRoute)
+app.use('/api/user', restoreRoute);
 
 
 app.get('/', (req, res)=>{

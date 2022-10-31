@@ -13,6 +13,7 @@ const Header = () => {
     const [cart, setCart] = value.userApi.cart;
     const [isAdmin, setIsAdmin] = value.userApi.isAdmin
 
+
     useEffect(()=>{
         if(store) {
             setCart(store.cart)
@@ -58,8 +59,8 @@ const Header = () => {
                 {store && !isAdmin ? <li className="user-name dropdown">user:
                         <span>{store.name}</span>
                         <div className="dropdown-content">
-                            <Link to={"/"}>Profile</Link>
-                            <Link to={"/"}>History</Link><hr/>
+                            <Link to={"/profile"}>Profile</Link>
+                            <Link to={"/history"}>History</Link><hr/>
                             <Link to="/login" onClick={signOutHandler}>Logout</Link>
                         </div>
                     </li>
@@ -68,14 +69,13 @@ const Header = () => {
                 <li><img src={Close} alt='' width="30" className="menu"/> </li>
 
             </ul>
-            {isAdmin ? <Link to={"/"}>Orders</Link>
+            {isAdmin ? <Link to={"/"} className="cart-icon">Orders</Link>
             : <div className="cart-icon">
                     {! cart ? null : <span>{cart.length}</span>}
                 <Link to={'/cart'}>
                     <img src ={Cart} alt='' width='30'/>
                 </Link>
             </div>}
-
         </header>
     );
 };

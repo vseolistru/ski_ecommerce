@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema({
     isActivated: {type:Boolean, default:false},
     role: {type: Number, default:0},
     cart:{type: Array, default: []},
+    activationLink:{type:String}
 
 }, {timestamps:true})
 

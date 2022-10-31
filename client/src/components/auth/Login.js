@@ -35,26 +35,30 @@ const Login = () => {
     }, [store])
     
     return (
-        <div className="login-page">
-            <Helmet>
-                <title>SKI & BIKE STORE - Login page</title>
-            </Helmet>
-            <form onSubmit={loginSubmit}>
-                <h1>Login</h1>
-                <label>User</label>
-                <input type="email" name="email" required
-                       placeholder="Email" value={user.email} onChange={onChangeInput}/>
+        <>
+            <div className="login-page">
+                <Helmet>
+                    <title>SKI & BIKE STORE - Login page</title>
+                </Helmet>
+                <form onSubmit={loginSubmit}>
+                    <h1>Login</h1>
+                    <label>User</label>
+                    <input type="email" name="email" required
+                           placeholder="Email" value={user.email} onChange={onChangeInput}/>
 
-                <label>Password</label>
-                <input type="password" name="password" required placeholder="Password"
-                       value={user.password} onChange={onChangeInput}/>
+                    <label>Password</label>
+                    <input type="password" name="password" required placeholder="Password"
+                           value={user.password} onChange={onChangeInput}/>
 
-                <div className="row">
-                    <button type="submit">Login</button>
-                    <Link to={"/register"}>Register</Link>
-                </div>
-            </form>
-        </div>
+                    <div className="row">
+                        <button type="submit">Login</button>
+                        <Link to={"/forgot-password"}>Forgot password</Link>
+                        <Link to={"/register"}>Register</Link>
+                    </div>
+                </form>
+            </div>
+
+        </>
     );
 };
 
