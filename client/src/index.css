@@ -49,3 +49,11 @@ button {
 /*cart*/
 
 @import url("./components/cart/cart.css");
+
+/*profile*/
+
+@import url("./components/profile/profile.css");
+
+/*history*/
+
+@import url("./components/history/history.css");

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
 import axios from "axios";
 import {toast} from "react-toastify";
+import {getError} from "../utils/error";
 
 const EmailVerify = () => {
     const [validUrl, setValidUrl] = useState(false);
@@ -17,8 +18,8 @@ const EmailVerify = () => {
                 localStorage.setItem('Ski&bikePassword', JSON.stringify(data));
                 toast.success("Yuo successfully verified Email")
 
-            } catch (error) {
-                console.log(error);
+            } catch (e) {
+                toast.error(getError(e))
                 setValidUrl(false);
             }
         };

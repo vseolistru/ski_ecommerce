@@ -1,16 +1,28 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Helmet} from "react-helmet-async";
 import axios from "axios";
 import {toast} from "react-toastify";
+import {getError} from "../utils/error";
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('')
+    const store = JSON.parse(localStorage.getItem('Ski&bikeLogin'))
+
+    useEffect(()=>{
+        if (store) {
+            window.location.href = '/';
+        }
+    }, [store])
 
     const resetSubmit = async (e) => {
         e.preventDefault()
-        const {data} = await axios.post('/api/user/reset', {email})
-
-        toast.info("Link send to your email")
+        try{
+            const {data} = await axios.post('/api/user/reset', {email})
+            toast.info("Link send to your email")
+        }
+        catch (e) {
+            toast.error(getError(e))
+        }
     }
 
     return (
@@ -26,7 +38,6 @@ const ForgotPassword = () => {
                 <button type="submit">Reset Password</button>
                 </form>
         </div>
-
     );
 };
 

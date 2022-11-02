@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import {Helmet} from "react-helmet-async";
 import axios from "axios";
+import {toast} from "react-toastify";
+import {getError} from "../utils/error";
 
 const PasswordReset = () => {
     const [password, setPassword] = useState('')
@@ -9,11 +11,23 @@ const PasswordReset = () => {
     const userId = store.userId
     const token = store.token
 
+    const value = JSON.parse(localStorage.getItem('Ski&bikeLogin'))
+    useEffect(()=>{
+        if (value) {
+            window.location.href = '/';
+        }
+    }, [store])
+
     const resetSubmit = async (e) =>{
         e.preventDefault()
-        await axios.post(`/api/user/reset/${userId}/${token}`, {password})
-        localStorage.removeItem('Ski&bikePassword');
-        window.location.href = '/login';
+        try {
+            await axios.post(`/api/user/reset/${userId}/${token}`, {password})
+            localStorage.removeItem('Ski&bikePassword');
+            window.location.href = '/login';
+        }
+        catch (e) {
+            toast.error(getError(e))
+        }
     }
 
 

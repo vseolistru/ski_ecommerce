@@ -19,7 +19,7 @@ const Login = () => {
         try{
             const {data} = await axios.post('/api/users/login',{...user})
             setTimeout(() => toast("login..."), 2000);
-            const {isActivated, role, token, ...toStore } = data
+            const {isActivated, role, ...toStore } = data
             localStorage.setItem('Ski&bikeLogin', JSON.stringify(toStore));
             window.location.href = '/';
         }

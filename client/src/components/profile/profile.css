@@ -1,0 +1,26 @@
+.profile-view{
+    position: relative;
+    border: 1px solid #ccc;
+    transform: scaleY(0.98);
+    margin-top: 5px
+}
+.profile-view h1 {
+    color: #067aab;
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+}
+.profile-view h2 {
+    color: #d70005;
+    text-align: center;
+    letter-spacing: 2px;
+    font-size: 22px;
+    margin-bottom: 40px;
+}
+
+.profile-view p {
+    margin: 20px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}

@@ -40,7 +40,7 @@ const Cart = () => {
                         const paymentSystem = 'Stripe'
                         const paymentStatus = true;
                         await axios.post(`/api/orders/create/${store._id}`, {order:
-                                    {user_id, email, name, phone, cityAddress,
+                                    {user_id, email, name, phone, cityAddress, total,
                                     address, cart, paymentStatus, paymentSystem, shippingPrice}},
                             {headers: {authorization: `Bearer ${token}`}})
                     }
@@ -134,11 +134,11 @@ const Cart = () => {
                 if (store) {
                     const email = store.email
                     const user_id = store._id
-                    const paymentSystem = 'PayPal'
+                    const paymentSystem = 'PayPal '
                     const paymentStatus = true;
                     await axios.post(`/api/orders/create/${store._id}`, {order:
                                 {user_id, email, name, phone, cityAddress,
-                                    address, cart, paymentStatus, paymentSystem, shippingPrice}},
+                                    address, cart, paymentStatus, paymentSystem, shippingPrice, total}},
                         {headers: {authorization: `Bearer ${token}`}})
                 }
             await axios.patch(`/api/users/addcart/${store._id}`,
@@ -164,11 +164,11 @@ const Cart = () => {
             if (store) {
                 const email = store.email
                 const user_id = store._id
-                const paymentSystem = 'Pay Cash on delivery'
+                const paymentSystem = 'PayCash'
                 const paymentStatus = false;
                 await axios.post(`/api/orders/create/${store._id}`, {order:
                             {user_id, email, name, phone, cityAddress,
-                                address, cart, paymentStatus, paymentSystem, shippingPrice}},
+                                address, cart, paymentStatus, paymentSystem, shippingPrice, total}},
                     {headers: {authorization: `Bearer ${token}`}})
             }
             await axios.patch(`/api/users/addcart/${store._id}`,

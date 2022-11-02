@@ -23,6 +23,7 @@ const Header = () => {
     const signOutHandler = async () => {
         await axios.post('/api/users/logout')
         localStorage.removeItem('Ski&bikeLogin');
+        localStorage.removeItem('Ski&bikeOrder');
         setIsAdmin(false)
         window.location.href = '/login';
     }

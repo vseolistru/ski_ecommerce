@@ -8,6 +8,7 @@ const UserAPI = (token) => {
     const [isAdmin, setisAdmin] = useState(false)
     const [cart, setCart] = useState([])
     const store = JSON.parse(localStorage.getItem('Ski&bikeLogin'))
+    const [order, setOrder] =useState({})
 
 
     useEffect(()=>{
@@ -17,10 +18,8 @@ const UserAPI = (token) => {
                     if (store) {
                         const res = await axios.get(`/api/users/infor/${store._id}`,
                             {headers: {authorization: `Bearer ${token}`}})
-                        console.log(res.data.role)
                         setIsLogged(true)
                         res.data.role === 1 ? setisAdmin(true) : setisAdmin(false)
-
                     }
                 }
                 catch (e) {
@@ -31,7 +30,6 @@ const UserAPI = (token) => {
             getUser()
         }
     },[token, isAdmin])
-
 
     const addToCart = async (product, sizes) => {
         if(!store) {

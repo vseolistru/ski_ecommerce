@@ -5,6 +5,8 @@ import mailService from "../middleware/mailService/mailService.js";
 import Token from "../models/Token.js";
 import bcrypt from "bcrypt";
 
+
+const strongPassword = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})");
 const restoreRoute = express.Router();
 
 const generateJwt = (id, email) => {
@@ -51,6 +53,12 @@ restoreRoute.get('/reset/:id/:token', async (req,res)=> {
 restoreRoute.post('/reset/:id/:token', async(req, res) => {
     try {
         const {password} = req.body
+        if (password.length < 8) {
+            return res.status(403).json({message:'Password must contain 8 symbols'})
+        }
+        if (!strongPassword.test(password)) {
+            return res.status(403).json({message:'Password must contain 1 special character, 1 uppercase character, 1 number'})
+        }
         const user = await User.findOne({_id: req.params.id});
         if (!user) return res.status(400).send({message: "Invalid link"});
 
