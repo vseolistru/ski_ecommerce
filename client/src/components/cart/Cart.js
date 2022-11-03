@@ -9,8 +9,8 @@ import StripeCheckout from "react-stripe-checkout";
 
 const Cart = () => {
     const state = useContext(State);
-    const [cart,setCart] = state.userApi.cart;
     const [token] = state.token
+    const [cart,setCart] = state.userApi.cart;
     const store = JSON.parse(localStorage.getItem('Ski&bikeLogin'));
     const [total, setTotal] = useState(0);
     const KEY = 'pk_test_51LqNxOHzt5ZIBOz4XLtvoqCEJMLlRLQ1DUh8qM6l8uKQOlfrlEL3vH5b25eYsqLPyPZRSrTJFp07faJclgWkeeT200rwe5dU0G';
@@ -47,9 +47,10 @@ const Cart = () => {
                     await axios.patch(`/api/users/addcart/${store._id}`,
                         {cart: []},
                         {headers: {authorization: `Bearer ${token}`}});
+
                     const {data} = await axios.get(`/api/users/infor/${store._id}`,
                         {headers: {authorization: `Bearer ${token}`}});
-                    const {isActivated, role, ...toStore } = data
+                    const {isActivated, role, ...toStore} = data
                     localStorage.setItem('Ski&bikeLogin', JSON.stringify(toStore));
                     window.location.href = '/';
                 }
@@ -71,10 +72,10 @@ const Cart = () => {
 
         const {data} = await axios.get(`/api/users/infor/${store._id}`,
             {headers: {authorization: `Bearer ${token}`}})
-
-        const {isActivated, role, ...toStore } = data
+        const {isActivated, role, ...toStore} = data
         localStorage.setItem('Ski&bikeLogin', JSON.stringify(toStore));
         toast.success(`Product has been updated in cart`, )
+
     }
 
     useEffect(()=>{
@@ -144,9 +145,10 @@ const Cart = () => {
             await axios.patch(`/api/users/addcart/${store._id}`,
                 {cart: []},
                 {headers: {authorization: `Bearer ${token}`}});
+
             const {data} = await axios.get(`/api/users/infor/${store._id}`,
                 {headers: {authorization: `Bearer ${token}`}});
-            const {isActivated, role, ...toStore } = data
+            const {isActivated, role, ...toStore} = data
             localStorage.setItem('Ski&bikeLogin', JSON.stringify(toStore));
             window.location.href = '/';
             }
@@ -174,10 +176,10 @@ const Cart = () => {
             await axios.patch(`/api/users/addcart/${store._id}`,
                 {cart: []},
                 {headers: {authorization: `Bearer ${token}`}});
+
             const {data} = await axios.get(`/api/users/infor/${store._id}`,
                 {headers: {authorization: `Bearer ${token}`}});
-            const {isActivated, role, ...toStore } = data
-            localStorage.setItem('Ski&bikeLogin', JSON.stringify(toStore));
+            localStorage.setItem('Ski&bikeLogin', JSON.stringify(data));
             window.location.href = '/';
         }
         catch (e) {

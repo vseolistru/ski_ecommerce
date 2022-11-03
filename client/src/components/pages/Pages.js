@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Route, Routes} from 'react-router-dom'
 import Products from "../products/Products";
 import Login from "../auth/Login";
@@ -12,12 +12,19 @@ import ForgotPassword from "../auth/ForgotPasword";
 import EmailVerify from "../auth/EmailVerify";
 import PasswordReset from "../auth/PasswordReset";
 import HistoryDetails from "../history/HistoryDetails";
+import {State} from "../../Store";
+import Orders from "../admin/Orders";
+import OrdersDetails from "../admin/OrdersDetails";
 
 
 
 
 //Switch to Routes
 const Pages = () => {
+    const value = useContext(State)
+    const [isAdmin] = value.userApi.isAdmin
+
+
     return (
         <Routes>
             <Route path ='/' exact element={<Products/>}/>
@@ -31,8 +38,8 @@ const Pages = () => {
             <Route path ='/history' exact element={<History/>}/>
             <Route path ='/profile' exact element={<Profile/>}/>
             <Route path ='/order/:id' exact element={<HistoryDetails/>}/>
-
-
+            {isAdmin ? <Route path ='/orders' exact element={<Orders/>}/> : null}
+            {isAdmin ? <Route path ='/orderitem/:id' exact element={<OrdersDetails/>}/> : null}
             <Route path ='*' exact element={<NotFound/>}/>
         </Routes>
     );

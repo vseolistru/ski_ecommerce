@@ -14,6 +14,8 @@ const StoreProvider = ({children}) => {
         if (store) {
          const response = await axios.get('/api/users/refreshtoken')
          setToken(response.data.token)
+         localStorage.setItem('Ski&bikeToken', JSON.stringify(response.data.token));
+
         }
     }
 

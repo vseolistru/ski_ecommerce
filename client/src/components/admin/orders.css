@@ -27,19 +27,25 @@
     margin: 20px 75px;
     font-weight: bold;
     font-size: 20px;
-
 }
+
+.orders-history thead {
+    background-color: rgba(49, 45, 3, 0.81);
+}
+
+
 .orders-history th {
-    color: #0041cc;
+    color: #d1d6e3;
     padding-left: 14px;
     letter-spacing: 2px;
-
 }
 .orders-history td {
     padding-top: 10px;
     padding-left: 40px;
     letter-spacing: 1px;
     font-size: 17px;
+    border: 1px solid #ccc;
+    font-weight: bold;
 }
 .orders-history a {
     padding: 5px 5px;
@@ -68,29 +74,29 @@
     transform: scaleY(0.98);
 }
 .orders-history img {
-    width: 270px;
-    height: 100%;
-    padding: 10px 10px;
+    width: 160px;
+    height: 190px;
+    padding: 20px 20px;
 }
 .orders-history span {
     color: #1406d3;
-    font-size: 24px;
+    font-size: 16px;
     font-weight: bold;
     letter-spacing: 2px;
 }
 
 .order-details h2 {
     color: #030386;
-    padding: 20px 20px;
+    padding: 10px 20px;
     text-align: center;
     margin-left: 70px;
-    font-size: 26px;
+    font-size: 18px;
     letter-spacing: 2px;
 }
 .order-details span {
-     color: #be9705;
+    color: #be9705;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 16px;
     letter-spacing: 2px;
 
 }
@@ -98,8 +104,44 @@
     flex-direction: row;
     margin-left: 84px;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+.order-history span {
+    color: #1406d3;
+    font-size: 24px;
+    font-weight: bold;
     letter-spacing: 2px;
 }
 
-
+.filter-orders {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 100px;
+    margin-bottom: 40px;
+    margin-top: 30px;
+    justify-content: center;
+}
+.filter-orders button {
+    margin-right: 30px;
+    background-color: #ff5c00;
+    width: 130px;
+    height: 30px;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.calendar {
+    display: flex;
+    overflow: hidden;
+    position: fixed;
+    top: 202px;
+    right: 295px;
+}
+.calendar-hidden {
+    display: none;
+    position: absolute;
+    top: 150px;
+    right: 30px;
+}

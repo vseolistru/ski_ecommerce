@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 const History = () => {
     const value = useContext(State)
     const store = JSON.parse(localStorage.getItem('Ski&bikeLogin'))
-    const token = store.token
+    const token = value.token[0]
     const [user_id, setUser_id] = useState('')
     const [data, setData] = useState([])
 
@@ -43,7 +43,7 @@ const History = () => {
                 <title>SKI & BIKE STORE - Orders page</title>
             </Helmet>
             <div className="orders-header">
-                <h1>Orders history</h1>
+                <h1>Orders history: {data.length}</h1>
             </div>
             <div className="orders">
                 <table className="orders-history">
@@ -69,7 +69,7 @@ const History = () => {
                                 <td>{item.paymentSystem} </td>
                                 {item.paymentStatus === true ? <td>Paid</td> : <td>Not paid</td>}
                                 <td>{item.cityAddress}</td>
-                                {item.isDelivered === true ? <td>Deliver</td> : <td>Not deliver</td>}
+                                <td>{item.isDelivered}</td>
                                 <td>{item.total}</td>
                                 <td>{item._id}</td>
                                 <td><Link to={`/order/${item._id}`}>Details</Link></td>

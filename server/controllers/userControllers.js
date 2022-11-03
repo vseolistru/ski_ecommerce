@@ -63,7 +63,7 @@ class UserControllers {
                     return res.status(400).json({message:"Please logging or register"});
                 }
                 const token = generateJwt(user._id, user.name, user.email, user.role)
-                res.json({user, token}).status(200)
+                res.json({token, user }).status(200)
             })
             //res.json({rfToken})
        }
@@ -118,7 +118,6 @@ class UserControllers {
             res.status(500).json({message: e.message})
         }
     }
-
     async getOne(req, res) {
         try {
             const user = await User.findById({_id: req.params.id}).select('-password')

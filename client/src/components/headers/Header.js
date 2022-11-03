@@ -12,7 +12,7 @@ const Header = () => {
     const store = JSON.parse(localStorage.getItem('Ski&bikeLogin'))
     const [cart, setCart] = value.userApi.cart;
     const [isAdmin, setIsAdmin] = value.userApi.isAdmin
-
+    const [isLogged,setIsLogged] = value.userApi.islogged
 
     useEffect(()=>{
         if(store) {
@@ -21,10 +21,10 @@ const Header = () => {
     },[])
 
     const signOutHandler = async () => {
-        await axios.post('/api/users/logout')
-        localStorage.removeItem('Ski&bikeLogin');
-        localStorage.removeItem('Ski&bikeOrder');
+        localStorage.clear()
         setIsAdmin(false)
+        setIsLogged(false)
+        //await axios.post('/api/users/logout')
         window.location.href = '/login';
     }
 
@@ -70,7 +70,7 @@ const Header = () => {
                 <li><img src={Close} alt='' width="30" className="menu"/> </li>
 
             </ul>
-            {isAdmin ? <Link to={"/"} className="cart-icon">Orders</Link>
+            {isAdmin ? <Link to={"/orders"} className="cart-icon">Orders</Link>
             : <div className="cart-icon">
                     {! cart ? null : <span>{cart.length}</span>}
                 <Link to={'/cart'}>

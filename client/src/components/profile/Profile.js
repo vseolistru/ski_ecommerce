@@ -4,15 +4,16 @@ import {State} from "../../Store";
 import {Helmet} from "react-helmet-async";
 
 const Profile = () => {
-    const value = useContext(State)
-    const token = value.token[0]
+    const store = JSON.parse(localStorage.getItem('Ski&bikeLogin'))
+    const state = useContext(State);
+    const [token] = state.token
     const [name, setName] = useState('')
     const [user_id, setUser_id] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [city, setCity] = useState('')
     const [address, setAddress] = useState('')
-    const store = JSON.parse(localStorage.getItem('Ski&bikeLogin'))
+
 
     useEffect(()=>{
         setUser_id(store._id)
@@ -21,15 +22,28 @@ const Profile = () => {
     useEffect(()=>{
         const fetchData = async () => {
             const {data} = await axios.get(`/api/orders/get/${user_id}`,
-                {headers: {authorization: `Bearer ${token}`}})
+                {headers: {authorization: `Bearer ${token}`}});
             setName(data.name)
             setEmail(data.email)
             setPhone(data.phone)
             setCity(data.cityAddress)
             setAddress(data.address)
         }
-        fetchData()
+            fetchData()
+
     })
+
+    if (!name) {
+        return (
+            <>
+                <Helmet>
+                    <title>SKI & BIKE STORE - Orders page</title>
+                </Helmet>
+                <div className="orders-error">
+                    <h2>You have not orders yet</h2></div>
+            </>
+        )
+    }
 
     return (
         <>

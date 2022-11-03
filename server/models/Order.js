@@ -12,7 +12,8 @@ const OrderSchema = new mongoose.Schema({
     address: {type: String, required: true},
     shippingPrice: {type: Number, required: true},
     cart:{type: Array, required:true},
-    isDelivered: {type:Boolean, default: false},
+    isDelivered: {type:String, default: 'inStore'},
+    orderStatus:{type:String, default: 'active'},
     deliverAt: {type:Date},
     paidAt:{type:Date}
 

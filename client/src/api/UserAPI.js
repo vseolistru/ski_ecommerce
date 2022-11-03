@@ -8,8 +8,6 @@ const UserAPI = (token) => {
     const [isAdmin, setisAdmin] = useState(false)
     const [cart, setCart] = useState([])
     const store = JSON.parse(localStorage.getItem('Ski&bikeLogin'))
-    const [order, setOrder] =useState({})
-
 
     useEffect(()=>{
         if(token) {
@@ -49,8 +47,8 @@ const UserAPI = (token) => {
                 const {data} = await axios.get(`/api/users/infor/${store._id}`,
                 {headers: {authorization: `Bearer ${token}`}})
 
-                const {isActivated, role, ...toStore } = data
-                localStorage.setItem('Ski&bikeLogin', JSON.stringify(toStore));
+               const {isActivated, role, ...toStore} = data
+               localStorage.setItem('Ski&bikeLogin', JSON.stringify(toStore));
                 toast.success("Product has been added to cart")
             }
             else {

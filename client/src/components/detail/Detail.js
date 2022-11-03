@@ -14,6 +14,7 @@ const Detail = () => {
     const [detail, setDetail] = useState([])
     const [sizes, setSizes] = useState([])
     const [selectedSizes, setSelectedSizes] = useState('')
+    const addToCart = state.userApi.addToCart
 
     useEffect(()=>{
         if (params.slug) {
@@ -84,7 +85,7 @@ const Detail = () => {
                     </form>
                     <p>{detail.description}</p>
                     <p>Sold: {detail.sold}</p>
-                    <Link to ="/cart" className="cart">Buy Now</Link>
+                    <Link to ="#" className="cart" onClick={()=>{addToCart(detail, selectedSizes)}}>Buy Now</Link>
                 </div>
             </div>
             <div>
