@@ -1,6 +1,7 @@
 import Order from "../models/Order.js";
 import User from "../models/User.js";
 import Product from "../models/Product.js";
+import Category from "../models/Category.js";
 
 class OrderControllers{
 
@@ -59,33 +60,36 @@ class OrderControllers{
     }
     async getAllOrders (req, res) {
         try{
-            const qNew = req.query.new;
             //http://localhost:5000/api/orders/getadmin?new=true
-            const qStatus = req.query.orderStatus;
+            // const qNew = req.query.new;
+            // if(qNew) {
+            //     orders = await Order.find().sort({createdAt: -1}).limit(1);
+            // }
+
             //http://localhost:5000/api/orders/getadmin?orderStatus=passed / active
+            const qStatus = req.query.orderStatus;
+
+            //http://localhost:5000/api/orders/getadmin?isDelivered=inStore
             const qIsDelivered = req.query.isDelivered;
-            //http://localhost:5000/api/orders/getadmin?isDelivered=true
+
+            //http://localhost:5000/api/orders/getadmin?createdAt=4.11.2022
             const qCreatedAt = req.query.createdAt;
-            const qCreatedTo = req.query.createdTo;
-            //http://localhost:5000/api/orders/getadmin?createdAt=2022-11-01&createdTo=2022-11-02
-            const qPaymentStatus = req.query.paymentStatus;
+
             //http://localhost:5000/api/orders/getadmin?paymentStatus=true
+            const qPaymentStatus = req.query.paymentStatus;
 
             let orders;
-            if(qNew) {
-                orders = await Order.find().sort({createdAt: -1}).limit(1);
-            }
-            else if (qStatus) {
+            if (qStatus) {
                 orders = await Order.find({orderStatus:{$in:qStatus,},});
             }
             else if (qPaymentStatus) {
                 orders = await Order.find({paymentStatus:{$in:qPaymentStatus,},});
             }
             else if (qIsDelivered) {
-                orders = await Order.find({isDelivered: {$in: qIsDelivered}});
+                orders = await Order.find({isDelivered: {$in: [qIsDelivered]}});
             }
             else if (qCreatedAt) {
-                orders = await Order.find({createdAt: {$gte: qCreatedAt, $lte: qCreatedTo}});
+                orders = await Order.find({orderDate: {$in: qCreatedAt}});
             }
             else{
                 orders = await Order.find();
@@ -97,6 +101,17 @@ class OrderControllers{
         }
     }
 
+    async closeOder (req, res) {
+        try {
+            const order = req.body;
+            await Order.findByIdAndUpdate({_id: req.params.id}, order)
+            const newName = await Order.find({_id: req.params.id})
+            res.json(newName).status(200);
+        }
+        catch (e) {
+            return res.json({message: e}).status(500);
+        }
+    }
 
 }
 

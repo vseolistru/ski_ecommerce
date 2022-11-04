@@ -68,7 +68,6 @@ header ul li:hover {
     z-index: 1;
     align-items: center;
     font-weight: bold;
-
 }
 .dropdown:hover .dropdown-content {
     display: block;

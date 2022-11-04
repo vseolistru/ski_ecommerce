@@ -3,6 +3,7 @@ import axios from "axios";
 import {State} from "../../Store";
 import {Helmet} from "react-helmet-async";
 import {Link} from "react-router-dom";
+import './history.css'
 
 const History = () => {
     const value = useContext(State)
@@ -64,7 +65,7 @@ const History = () => {
                 {
                     data.map(item =>(
                             <tr key={item._id}>
-                                <td>{item.createdAt.substring(0, 10)}</td>
+                                <td>{item.orderDate}</td>
                                 <td >{item.cart.length}</td>
                                 <td>{item.paymentSystem} </td>
                                 {item.paymentStatus === true ? <td>Paid</td> : <td>Not paid</td>}

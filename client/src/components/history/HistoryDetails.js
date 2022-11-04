@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import axios from "axios";
 import {Helmet} from "react-helmet-async";
-import {State} from "../../Store";
+import './history.css'
 
 const HistoryDetails = () => {
 
@@ -55,7 +55,7 @@ const HistoryDetails = () => {
                     </thead>
                     <tbody>
                     <tr>
-                        <td>{order.createdAt.substring(0,10)}</td>
+                        <td>{order.orderDate}</td>
                         <td>{order.cart.length}</td>
                         <td>{order.paymentSystem}</td>
                         {order.paymentStatus === true ? <td>Paid</td> : <td>Not paid</td>}

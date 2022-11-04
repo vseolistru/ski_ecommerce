@@ -19,11 +19,33 @@ const OrdersDetails = () => {
                 {headers: {authorization: `Bearer ${tokens}`}});
 
             localStorage.setItem('Ski&bikeOrder', JSON.stringify(data));
-            console.log(data)
             setOrders(data)
         }
         fetchData()
     },[])
+
+    const changeDeliver = async () => {
+        const isDelivered = {isDelivered: 'shipping...'}
+
+        await axios.put(`/api/orders/set/${id}`, isDelivered,
+            {headers: {authorization: `Bearer ${tokens}`}});
+
+        const {data} = await axios.get(`/api/orders/getone/${id}`,
+            {headers: {authorization: `Bearer ${tokens}`}});
+        localStorage.setItem('Ski&bikeOrder', JSON.stringify(data));
+        setOrders(data)
+    }
+
+    const closeOrder = async () => {
+        const close = {paymentStatus: true, orderStatus: "passed", isDelivered: 'delivered'}
+        await axios.put(`/api/orders/set/${id}`, close,
+            {headers: {authorization: `Bearer ${tokens}`}});
+
+        const {data} = await axios.get(`/api/orders/getone/${id}`,
+            {headers: {authorization: `Bearer ${tokens}`}});
+        localStorage.setItem('Ski&bikeOrder', JSON.stringify(data));
+        setOrders(data)
+    }
 
     if(!order){
         return (
@@ -33,6 +55,18 @@ const OrdersDetails = () => {
 
     return (
         <>
+            <div className="filter-orders ">
+                <div className="dropdown">
+                    <button onClick={closeOrder}>Close Order</button>
+                </div>
+                <div className="dropdown">
+                    <button>Shipment</button>
+                    <div className="dropdown-content">
+                        <span onClick={changeDeliver}>shipping...</span>
+                    </div>
+                </div>
+            </div>
+
             <Helmet>
                 <title>SKI & BIKE STORE - Order details admin page</title>
             </Helmet>
@@ -56,7 +90,7 @@ const OrdersDetails = () => {
                     </thead>
                     <tbody>
                     <tr>
-                        <td>{order.createdAt.substring(0,10)}</td>
+                        <td>{order.orderDate}</td>
                         <td>{order.cart.length}</td>
                         <td>{order.paymentSystem}</td>
                         {order.paymentStatus === true ? <td>Paid</td> : <td>Not paid</td>}

@@ -15,9 +15,10 @@ const OrderSchema = new mongoose.Schema({
     isDelivered: {type:String, default: 'inStore'},
     orderStatus:{type:String, default: 'active'},
     deliverAt: {type:Date},
-    paidAt:{type:Date}
+    paidAt:{type:Date},
+    orderDate:{type:String}
 
-},{timestamps:true})
+})
 
 const Order = mongoose.model('Order',OrderSchema)
 export default Order;

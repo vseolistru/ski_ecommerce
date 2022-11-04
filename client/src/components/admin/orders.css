@@ -11,6 +11,7 @@
     display: flex;
     position: relative;
     justify-content: center;
+    padding-top: 30px;
 }
 
 .orders-history {
@@ -32,7 +33,6 @@
 .orders-history thead {
     background-color: rgba(49, 45, 3, 0.81);
 }
-
 
 .orders-history th {
     color: #d1d6e3;
@@ -144,4 +144,30 @@
     position: absolute;
     top: 150px;
     right: 30px;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    padding: 2px 7px;
+    z-index: 1;
+    align-items: center;
+    font-weight: bold;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown-content span {
+    display: flex;
+    margin-top: 7px;
+    justify-content: center;
+    color:  #000580;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 19px;
 }
