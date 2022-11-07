@@ -10,8 +10,9 @@
 `npm i react-carousel-minimal`
 
 `npm install react-paypal-js`
-`npm i react-stripe-checkout
-`
+`npm i react-stripe-checkout`
+`npm i -s moedim` - **calendar**
+
 
 
 

@@ -1,6 +1,8 @@
 import React, {createContext, useEffect, useState} from 'react';
 import ProductsAPI from "./api/ProductsAPI";
 import UserAPI from "./api/UserAPI";
+import CategoriesAPI from "./api/CategoriesAPI";
+import BrandsAPI from "./api/BrandsAPI";
 import axios from "axios";
 
 export const State = createContext();
@@ -22,6 +24,8 @@ const StoreProvider = ({children}) => {
     const state = {
         token: [token, setToken],
         ProductsAPI: ProductsAPI(),
+        CategoriesAPI: CategoriesAPI(),
+        BrandsAPI:BrandsAPI(),
         userApi: UserAPI(token),
     }
 

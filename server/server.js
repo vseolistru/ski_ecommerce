@@ -25,10 +25,11 @@ const __dirname = dirname(__filename);
 
 app.use(cors());
 app.use(express.static(path.resolve(__dirname, 'static')))
+app.use(fileUpload({useTempFiles : true, tempFileDir : '/tmp/'}))
 app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({extended: true}))
-app.use(fileUpload({useTempFiles: true}));
+app.use(express.urlencoded({extended: false}))
+
 
 
 

@@ -5,7 +5,6 @@ import {Helmet} from "react-helmet-async";
 import './history.css'
 
 const HistoryDetails = () => {
-
     const params = useParams();
     const {id} = params;
     const order = JSON.parse(localStorage.getItem('Ski&bikeOrder'))

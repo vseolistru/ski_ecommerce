@@ -15,6 +15,9 @@ import HistoryDetails from "../history/HistoryDetails";
 import {State} from "../../Store";
 import Orders from "../admin/Orders";
 import OrdersDetails from "../admin/OrdersDetails";
+import Categories from "../admin/categories/Categories";
+import Brands from "../admin/categories/Brands";
+import CreateProducts from "../admin/createProducts/CreateProducts";
 
 
 
@@ -40,6 +43,10 @@ const Pages = () => {
             <Route path ='/order/:id' exact element={<HistoryDetails/>}/>
             {isAdmin ? <Route path ='/orders' exact element={<Orders/>}/> : null}
             {isAdmin ? <Route path ='/orderitem/:id' exact element={<OrdersDetails/>}/> : null}
+            {isAdmin ? <Route path ='/categories' exact element={<Categories/>}/>: null}
+            {isAdmin ? <Route path ='/brands' exact element={<Brands/>}/>: null}
+            {isAdmin ? <Route path = '/createproducts' exact element={<CreateProducts/>}/> : null }
+
             <Route path ='*' exact element={<NotFound/>}/>
         </Routes>
     );

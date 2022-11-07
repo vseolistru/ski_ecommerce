@@ -107,8 +107,10 @@ const Orders = () => {
 
     return (
         <>
+            <div className="wrapper">
             <span className={calendar}> <Calendar
                 value={value} onClick onChange={(d)=>dataFilter(d)} /></span>
+            </div>
             <div className="filter-orders ">
                 <div className="dropdown">
                     <button>Status</button>

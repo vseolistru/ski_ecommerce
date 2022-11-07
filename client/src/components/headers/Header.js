@@ -4,7 +4,7 @@ import Menu from "./icon/menu.svg";
 import Close from "./icon/close.svg";
 import Cart from "./icon/cart.svg"
 import {Link} from "react-router-dom";
-import axios from "axios";
+
 
 
 const Header = () => {
@@ -12,7 +12,7 @@ const Header = () => {
     const store = JSON.parse(localStorage.getItem('Ski&bikeLogin'))
     const [cart, setCart] = value.userApi.cart;
     const [isAdmin, setIsAdmin] = value.userApi.isAdmin
-    const [isLogged,setIsLogged] = value.userApi.islogged
+
 
     useEffect(()=>{
         if(store) {
@@ -23,7 +23,6 @@ const Header = () => {
     const signOutHandler = async () => {
         localStorage.clear()
         setIsAdmin(false)
-        setIsLogged(false)
         //await axios.post('/api/users/logout')
         window.location.href = '/login';
     }
@@ -44,9 +43,9 @@ const Header = () => {
                 {isAdmin? '' :<li><Link to={'/'}>Products</Link></li>}
                 {isAdmin
                     ? (<>
-                        <li ><Link to = '/create_product'>Create Product</Link></li>
-                        <li><Link to = '/category'>Categories</Link></li>
-                        <li><Link to = '/brand'>Brands</Link></li>
+                        <li ><Link to = '/createproducts'>Create Product</Link></li>
+                        <li><Link to = '/categories'>Categories</Link></li>
+                        <li><Link to = '/brands'>Brands</Link></li>
                         <li className="user-name dropdown">
                             admin: <span>{store.name}</span>
                             <div className="dropdown-content">

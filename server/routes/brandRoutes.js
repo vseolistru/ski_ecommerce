@@ -8,9 +8,7 @@ const brandRoute = express.Router();
 brandRoute.post('/', verifyAdmin, async (req, res)=>{
     try {
         const {name} = req.body;
-        if (!name) {
-            return res.status(403).json({msg:'Value of brand cannot be empty!'})
-        }
+
         const brandName = await Brand.findOne({name})
         if(brandName){
             return res.json({msg: 'Such brand have exist'}).status(406)
@@ -45,6 +43,7 @@ brandRoute.delete('/:id', verifyAdmin, async (req, res)=>{
 brandRoute.put('/:id', verifyAdmin, async (req, res) => {
     try {
         const {name} = req.body;
+        console.log(name)
         await Brand.findByIdAndUpdate(
             {_id: req.params.id}, {name})
         const newName = await Brand.find({_id: req.params.id})

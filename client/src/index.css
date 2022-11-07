@@ -43,17 +43,18 @@ button {
 @import url("./components/detail/detail.css");
 
 /*login-register*/
-
 @import url("./components/auth/login.css");
 
 /*cart*/
-
 @import url("./components/cart/cart.css");
 
 /*profile*/
-
 @import url("./components/profile/profile.css");
 
-/*history*/
+/*categories*/
+@import url("./components/admin/categories/categories.css");
 
-/*@import url("./components/history/history.css");*/
+/*createproducts*/
+@import url("./components/admin/createProducts/createproducts.css");
+
+

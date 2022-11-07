@@ -9,12 +9,13 @@ class ProdControllers {
 
      async create(req, res) {
          try {
-             const {title, catId, brandId, description, price, size, productId} = req.body;
-             if (!title || !catId || !brandId || !description || !price || !size || !productId) {
-                 return res.status(403).json('Value of product`s field cannot be empty')
-             }
+
+             const {title, category, brand, description, price, size, productId} = req.body;
+             // if (!title || !category || !brand || !description || !price || !size || !productId) {
+             //     return res.status(403).json('Value of product`s field cannot be empty')
+             // }
              const {img1, img2, img3} = req.files
-             if (!img1 || !img2 || !img3) {
+             if (!img1) {
                  return res.json({message: "Images cannot be empty"}).status(500);             }
 
              await img1.mv(path.resolve(__dirname, '..', 'static', img1.name));
@@ -22,8 +23,8 @@ class ProdControllers {
              await img3.mv(path.resolve(__dirname, '..', 'static', img3.name));
              const product = await Product.create({
                  title:title.toLowerCase(),
-                 catId,
-                 brandId,
+                 category,
+                 brand,
                  description,
                  price,
                  size,
@@ -65,8 +66,8 @@ class ProdControllers {
     async getAll(req, res) {
         try {
             const qNew = req.query.new;
-            const qCatId = req.query.catId;
-            const qBrandId = req.query.brandId;
+            const qCatId = req.query.category;
+            const qBrandId = req.query.brand;
             const qSize = req.query.size;
             let products;
             if(qNew) {

@@ -7,15 +7,12 @@ const categoryRoute = express.Router();
 categoryRoute.post('/', verifyAdmin, async (req,res ) => {
     try {
         const {name} = req.body;
-        if (!name) {
-            return res.status(403).json({msg:'Value of category cannot be empty!'})
-        }
-         const catName = await Category.findOne({name})
+        const catName = await Category.findOne({name})
         if(catName){
             return res.json({msg: 'Such category have exist'}).status(406)
         }
         const updatedCatName = await Category.create({name});
-        return res.json(updatedCatName).status(200)
+        res.json(updatedCatName).status(200)
     } catch (e) {
         return res.status(500).json(e)
     }

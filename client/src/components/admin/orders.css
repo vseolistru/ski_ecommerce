@@ -1,3 +1,4 @@
+
 .orders-header {
     color: #067aab;
     text-align: center;
@@ -11,7 +12,6 @@
     display: flex;
     position: relative;
     justify-content: center;
-    padding-top: 30px;
 }
 
 .orders-history {
@@ -119,7 +119,7 @@
     flex-direction: row;
     padding: 10px 100px;
     margin-bottom: 40px;
-    margin-top: 30px;
+    margin-top: 15px;
     justify-content: center;
 }
 .filter-orders button {
@@ -131,13 +131,15 @@
     color: #fff;
     font-weight: bold;
     letter-spacing: 1px;
+    font-size: 15px;
+}
+.wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
 }
 .calendar {
     display: flex;
-    overflow: hidden;
-    position: fixed;
-    top: 202px;
-    right: 295px;
 }
 .calendar-hidden {
     display: none;

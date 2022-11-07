@@ -69,7 +69,7 @@ const Detail = () => {
                         textAlign: "center",
                         maxWidth: "850px",
                         maxHeight: "500px",
-                        margin: "30px auto",
+                        marginLeft: "10px",
                     }}
                 />
                 <div className="box-detail">

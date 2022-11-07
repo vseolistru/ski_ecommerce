@@ -3,6 +3,7 @@ import {State} from "../../Store";
 import {useParams} from "react-router-dom";
 import axios from "axios";
 import {Helmet} from "react-helmet-async";
+import {toast} from "react-toastify";
 
 const OrdersDetails = () => {
 
@@ -34,10 +35,11 @@ const OrdersDetails = () => {
             {headers: {authorization: `Bearer ${tokens}`}});
         localStorage.setItem('Ski&bikeOrder', JSON.stringify(data));
         setOrders(data)
+        toast.info("You change shipment status by order")
     }
 
     const closeOrder = async () => {
-        const close = {paymentStatus: true, orderStatus: "passed", isDelivered: 'delivered'}
+        const close = {paymentStatus: true, orderStatus: "passed", isDelivered: 'Delivered'}
         await axios.put(`/api/orders/set/${id}`, close,
             {headers: {authorization: `Bearer ${tokens}`}});
 
@@ -45,6 +47,7 @@ const OrdersDetails = () => {
             {headers: {authorization: `Bearer ${tokens}`}});
         localStorage.setItem('Ski&bikeOrder', JSON.stringify(data));
         setOrders(data)
+        toast.success("You successfully compiled an order")
     }
 
     if(!order){
@@ -56,15 +59,8 @@ const OrdersDetails = () => {
     return (
         <>
             <div className="filter-orders ">
-                <div className="dropdown">
                     <button onClick={closeOrder}>Close Order</button>
-                </div>
-                <div className="dropdown">
-                    <button>Shipment</button>
-                    <div className="dropdown-content">
-                        <span onClick={changeDeliver}>shipping...</span>
-                    </div>
-                </div>
+                {order.orderStatus ==='passed' ? null : <button onClick={changeDeliver}>shipping...</button>}
             </div>
 
             <Helmet>
@@ -115,7 +111,7 @@ const OrdersDetails = () => {
                     </thead>
                     <tbody>
                     <tr>
-                        <td>{order.createdAt.substring(0,10)}</td>
+                        <td>{order.orderDate}</td>
                         <td>{order.name}</td>
                         <td>{order.paymentSystem}</td>
                         {order.paymentStatus === true ? <td>Paid</td> : <td>Not paid</td>}
