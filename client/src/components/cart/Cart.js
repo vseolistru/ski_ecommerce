@@ -15,13 +15,11 @@ const Cart = () => {
     const [total, setTotal] = useState(0);
     const KEY = 'pk_test_51LqNxOHzt5ZIBOz4XLtvoqCEJMLlRLQ1DUh8qM6l8uKQOlfrlEL3vH5b25eYsqLPyPZRSrTJFp07faJclgWkeeT200rwe5dU0G';
     const [stripeToken, setStripeToken] = useState(null);
-    //shipping data-form init
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [cityAddress, setCityAddress] = useState('');
     const [address, setAddress] = useState('');
     const shippingPrice = 600
-    //
 
     const onToken = (token) => {
         setStripeToken(token)
@@ -46,6 +44,14 @@ const Cart = () => {
                                     {user_id, email, name, phone, cityAddress, total, orderDate,
                                     address, cart, paymentStatus, paymentSystem, shippingPrice}},
                             {headers: {authorization: `Bearer ${token}`}})
+                        data.cart.forEach(item => {
+                            const soldupdate = async (item) =>{
+                                const sold = item.sold
+                                await axios.put(`/api/products/sold/${item._id}`,{sold},
+                                    {headers: {authorization: `Bearer ${token}`}})
+                            }
+                            soldupdate(item)
+                        })
                     }
                     await axios.patch(`/api/users/addcart/${store._id}`,
                         {cart: []},
@@ -78,7 +84,6 @@ const Cart = () => {
         const {isActivated, role, ...toStore} = data
         localStorage.setItem('Ski&bikeLogin', JSON.stringify(toStore));
         toast.success(`Product has been updated in cart`, )
-
     }
 
     useEffect(()=>{
@@ -95,6 +100,7 @@ const Cart = () => {
         cart.forEach(item => {
             if(item._id === id){
                 item.quantity += 1
+                item.sold = item.quantity
             }
         })
         setCart([...cart])
@@ -104,7 +110,14 @@ const Cart = () => {
     const decrement = (id) => {
         cart.forEach(item => {
             if(item._id === id){
-                item.quantity === 1 ? item.quantity =1 : item.quantity -=1
+                if (item.quantity === 1){
+                    item.quantity = 1
+                    item.sold = item.quantity
+                }
+                else {
+                    item.quantity -=1;
+                    item.sold = item.quantity
+                }
             }
         })
         setCart([...cart])
@@ -142,11 +155,18 @@ const Cart = () => {
                     const paymentStatus = true;
                     const date = new Date()
                     const orderDate = (date.getDate()+'.'+(Number(date.getMonth())+1)+'.'+date.getUTCFullYear())
-
                     await axios.post(`/api/orders/create/${store._id}`, {order:
                                 {user_id, email, name, phone, cityAddress, orderDate,
                                     address, cart, paymentStatus, paymentSystem, shippingPrice, total}},
                         {headers: {authorization: `Bearer ${token}`}})
+                    data.cart.forEach(item => {
+                        const soldupdate = async (item) =>{
+                            const sold = item.sold
+                            await axios.put(`/api/products/sold/${item._id}`,{sold},
+                                {headers: {authorization: `Bearer ${token}`}})
+                        }
+                        soldupdate(item)
+                    })
                 }
             await axios.patch(`/api/users/addcart/${store._id}`,
                 {cart: []},
@@ -176,10 +196,19 @@ const Cart = () => {
                 const paymentStatus = false;
                 const date = new Date()
                 const orderDate = (date.getDate()+'.'+(Number(date.getMonth())+1)+'.'+date.getUTCFullYear())
-                await axios.post(`/api/orders/create/${store._id}`, {order:
+                const {data} = await axios.post(`/api/orders/create/${store._id}`, {order:
                             {user_id, email, name, phone, cityAddress,orderDate,
                                 address, cart, paymentStatus, paymentSystem, shippingPrice, total}},
                     {headers: {authorization: `Bearer ${token}`}})
+
+                data.cart.forEach(item => {
+                    const soldupdate = async (item) =>{
+                        const sold = item.sold
+                        await axios.put(`/api/products/sold/${item._id}`,{sold},
+                            {headers: {authorization: `Bearer ${token}`}})
+                    }
+                    soldupdate(item)
+                })
             }
             await axios.patch(`/api/users/addcart/${store._id}`,
                 {cart: []},

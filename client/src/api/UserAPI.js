@@ -38,10 +38,10 @@ const UserAPI = (token) => {
             const existItem = cart.every(item => item._id !== product._id)
             if (existItem) {
                 const sizesToSell = sizes
-                setCart([...cart, {...product, quantity: 1, sizesToSell}])
+                setCart([...cart, {...product, sold:1, quantity: 1, sizesToSell}])
 
                 await axios.patch(`/api/users/addcart/${store._id}`,
-                    {cart: [...cart, {...product, quantity: 1, sizesToSell}]},
+                    {cart: [...cart, {...product, sold:1, quantity: 1, sizesToSell}]},
                     {headers: {authorization: `Bearer ${token}`}})
 
                 const {data} = await axios.get(`/api/users/infor/${store._id}`,

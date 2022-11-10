@@ -6,8 +6,6 @@ import {toast} from "react-toastify";
 
 
 const ProductItem = ({product, isAdmin}) => {
-    const store = JSON.parse(localStorage.getItem('Ski&bikeLogin'));
-    const token = store.token;
     const [selectedSizes, setSelectedSizes] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -15,6 +13,8 @@ const ProductItem = ({product, isAdmin}) => {
 
     const deleteProduct = async () => {
         try {
+            const store = JSON.parse(localStorage.getItem('Ski&bikeLogin'));
+            const token = store.token;
             setLoading(true)
             await axios.delete(`/api/products/${product._id}`,
                 {headers: {authorization: `Bearer ${token}`}});
@@ -55,5 +55,4 @@ const ProductItem = ({product, isAdmin}) => {
 };
 
 export default ProductItem;
-
 ;

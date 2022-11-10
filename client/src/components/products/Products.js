@@ -8,7 +8,7 @@ import {Helmet} from "react-helmet-async";
 const Products = () => {
     const  state  = useContext(State);
     const [products] = state.ProductsAPI.products
-    const [isAdmin] = state.userApi.isAdmin
+
 
 
     return (
@@ -19,8 +19,7 @@ const Products = () => {
             <div className="products">
                 {
                     products.map(product => {
-                        return <ProductItem key={product.slug}
-                                            product={product} isAdmin = {isAdmin} />
+                        return <ProductItem key={product.slug} product={product}/>
                     })
                 }
             </div>

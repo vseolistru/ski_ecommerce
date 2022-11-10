@@ -13,9 +13,9 @@ class ProdControllers {
          try {
 
              const {title, category, brand, description, price, size, productId} = req.body;
-             // if (!title || !category || !brand || !description || !price || !size || !productId) {
-             //     return res.status(403).json('Value of product`s field cannot be empty')
-             // }
+             if (!title || !category || !brand || !description || !price || !productId) {
+                 return res.status(403).json('Value of product`s field cannot be empty')
+             }
              const {img1, img2, img3} = req.files
              if (!img1) {
                  return res.json({message: "Images cannot be empty"}).status(500);             }
@@ -48,6 +48,20 @@ class ProdControllers {
             const updateProd = await Product.findByIdAndUpdate(
                 req.params.id,
                 {$set: req.body}, {new: true}
+            );
+            const {...data} = updateProd._doc;
+            res.json({...data}).status(200);
+        } catch (e) {
+            res.status(501).json('Не выполнено')
+        }
+    }
+
+    async updateSold(req, res) {
+        try {
+            const {sold} = req.body;
+            const updateProd = await Product.findByIdAndUpdate(
+                req.params.id,
+                {$set: req.body}, {sold}
             );
             const {...data} = updateProd._doc;
             res.json({...data}).status(200);

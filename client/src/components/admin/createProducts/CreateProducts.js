@@ -4,7 +4,8 @@ import {Helmet} from "react-helmet-async";
 import axios from "axios";
 import {toast} from "react-toastify";
 import {useParams} from "react-router-dom";
-
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const initialState = {
     productId: '', title: '', description: 'Default description',
@@ -18,12 +19,13 @@ const CreateProducts = () => {
     const store = JSON.parse(localStorage.getItem('Ski&bikeLogin'))
     const token = store.token;
     const [product, setProduct] = useState(initialState);
-    const [categories] = state.CategoriesAPI.categories;
-    const [brands] = state.BrandsAPI.brands;
+    const [categories, setCategories] = state.CategoriesAPI.categories;
+    const [brands, setBrands] = state.BrandsAPI.brands;
     const [selectedImg1, setSelectedImg1] = useState('');
     const [selectedImg2, setImg2] = useState('');
     const [selectedImg3, setImg3] = useState('');
     const [size, setSize] = useState([])
+    const [body, setBody] = useState(product.description)
     const [callback, setCallback] = state.ProductsAPI.products;
 
     useEffect(()=>{
@@ -47,7 +49,7 @@ const CreateProducts = () => {
         const file = e.target.files[0]
         setSelectedImg1(file)
     }
-    console.log(product)
+
     const handleChangeInput = (e) => {
         e.preventDefault()
         const {name, value} = e.target
@@ -75,6 +77,11 @@ const CreateProducts = () => {
         setCallback(!callback)
         toast.success(`You successfully create a product ${product.title}`)
         setTimeout(()=> {window.location.href = '/';}, 2000)
+    }
+
+
+    const handleBody = (e) =>{
+        setBody(e)
     }
 
     return (
@@ -123,6 +130,9 @@ const CreateProducts = () => {
                         </div>
                         <div className="row">
                             <label htmlFor="description">Description</label>
+                            {/*<ReactQuill //modules={modules} formats={formats}*/}
+                            {/*            value={body} onChange={handleBody}*/}
+                            {/*/>*/}
                             <textarea type="text" name="description"
                                    id="description" required
                                       value={product.description} onChange={handleChangeInput} rows="10"
