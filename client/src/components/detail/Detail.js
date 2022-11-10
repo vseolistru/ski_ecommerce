@@ -8,7 +8,7 @@ import ProductItem from "../utils/productitem/ProductItem";
 
 const Detail = () => {
     const params = useParams()
-    const  state  = useContext(State);
+    const state  = useContext(State);
     const {slug} = params
     const [products] = state.ProductsAPI.products
     const [detail, setDetail] = useState([])
@@ -92,7 +92,7 @@ const Detail = () => {
                 <h2>Related by category</h2>
                 <div className="products">
                     {products.map(product => (
-                        product.catId === detail.catId
+                        product.category === detail.category
                             ? (<ProductItem key={product.slug} product={product}/>)
                             : (null)
                     ))}
@@ -100,7 +100,7 @@ const Detail = () => {
                 <h2>Related by brand</h2>
                 <div className="products">
                     {products.map(product=>{
-                        return product.brandId === detail.brandId
+                        return product.brand === detail.brand
                             ? <ProductItem key={product.slug} product={product}/>
                             : null
                     })}

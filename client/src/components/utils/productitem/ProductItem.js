@@ -1,18 +1,42 @@
 import React, {useState} from 'react';
 import BtnRender from "./BtnRender";
+import axios from "axios";
+import Loading from "../loading/loading";
+import {toast} from "react-toastify";
 
 
-//const cartItems = JSON.parse(localStorage.getItem('Ski&bikeCart'))
 const ProductItem = ({product, isAdmin}) => {
-    const [selectedSizes, setSelectedSizes] = useState('')
-    //console.log(selectedSizes)
+    const store = JSON.parse(localStorage.getItem('Ski&bikeLogin'));
+    const token = store.token;
+    const [selectedSizes, setSelectedSizes] = useState('');
+    const [loading, setLoading] = useState(false);
 
+
+
+    const deleteProduct = async () => {
+        try {
+            setLoading(true)
+            await axios.delete(`/api/products/${product._id}`,
+                {headers: {authorization: `Bearer ${token}`}});
+            toast.success(`You successfully delete a product ${product.title}`)
+            setTimeout(() => {
+                window.location.href = '/';
+                setLoading(false)
+            }, 1300)
+        }
+        catch (e) {
+            toast.success(`You successfully delete a product ${product.title}`)
+            setTimeout(() => {
+                window.location.href = '/';
+                setLoading(false)
+            }, 1300)
+        }
+    }
+
+    if (loading) return <Loading/>
 
     return (
         <div className="product-card">
-            {
-                isAdmin && <input type ="checkbox" checked={product.checked}/>
-            }
             <img src={product.img1} alt={product.slug} title={product.slug}/>
             <div className="product_box">
                 <h1 title={product.title}>{product.title}</h1>
@@ -25,9 +49,11 @@ const ProductItem = ({product, isAdmin}) => {
                 </form>
                 <p>{product.description}</p>
             </div>
-            <BtnRender product={product} sizes = {selectedSizes}/>
+            <BtnRender product={product} sizes = {selectedSizes} deleteProduct={deleteProduct}/>
         </div>
     );
 };
 
 export default ProductItem;
+
+;

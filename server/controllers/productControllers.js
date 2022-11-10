@@ -2,8 +2,10 @@ import Product from "../models/Product.js";
 import path from "path";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import fs from 'fs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
 
 class ProdControllers {
 
@@ -56,7 +58,10 @@ class ProdControllers {
 
     async delete(req, res) {
         try {
-            await Product.findByIdAndDelete({_id: req.params.id})
+            const product = await Product.findByIdAndDelete({_id: req.params.id})
+            fs.unlinkSync(path.resolve(__dirname, '..', 'static', product.img1));
+            fs.unlinkSync(path.resolve(__dirname, '..', 'static', product.img2));
+            fs.unlinkSync(path.resolve(__dirname, '..', 'static', product.img3));
             return res.status(200).json({message: "Товар удален"})
         } catch (e) {
             res.status(501).json({message: e})

@@ -10,6 +10,7 @@ const Products = () => {
     const [products] = state.ProductsAPI.products
     const [isAdmin] = state.userApi.isAdmin
 
+
     return (
         <>
             <Helmet>
@@ -19,7 +20,7 @@ const Products = () => {
                 {
                     products.map(product => {
                         return <ProductItem key={product.slug}
-                                            product={product} isAdmin = {isAdmin}/>
+                                            product={product} isAdmin = {isAdmin} />
                     })
                 }
             </div>

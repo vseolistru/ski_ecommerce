@@ -1,6 +1,8 @@
 import express from "express";
 import {verifyAdmin} from "../middleware/auth.js";
 import productControllers from "../controllers/productControllers.js";
+
+
 const productRouter  = express.Router();
 
 productRouter.post('/', verifyAdmin, productControllers.create);

@@ -40,7 +40,7 @@ const Header = () => {
                 </h1>
             </div>
             <ul>
-                {isAdmin? '' :<li><Link to={'/'}>Products</Link></li>}
+                <li><Link to={'/'}>Products</Link></li>
                 {isAdmin
                     ? (<>
                         <li ><Link to = '/createproducts'>Create Product</Link></li>

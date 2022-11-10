@@ -46,7 +46,7 @@ const Pages = () => {
             {isAdmin ? <Route path ='/categories' exact element={<Categories/>}/>: null}
             {isAdmin ? <Route path ='/brands' exact element={<Brands/>}/>: null}
             {isAdmin ? <Route path = '/createproducts' exact element={<CreateProducts/>}/> : null }
-
+            {isAdmin ? <Route path = '/edit/:slug' exact element={<CreateProducts/>}/> : null }
             <Route path ='*' exact element={<NotFound/>}/>
         </Routes>
     );

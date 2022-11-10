@@ -19,12 +19,12 @@ const Categories = () => {
         e.preventDefault()
         try {
             if(edit) {
-                const {data} = await axios.put(`/api/brand/${id}`, {name: brand},
+                await axios.put(`/api/brand/${id}`, {name: brand},
                     {headers: {authorization: `Bearer ${token}`}})
                 toast.success(`You edit a brand: ${brand}`)
             }
             else {
-                const {data} = await axios.post('/api/brand', {name: brand},
+                await axios.post('/api/brand', {name: brand},
                     {headers: {authorization: `Bearer ${token}`}})
                 toast.success(`You create a brand: ${brand}`)
             }
@@ -44,7 +44,7 @@ const Categories = () => {
 
     const deleteCategory = async (id) => {
         try{
-            const {data} = await axios.delete(`/api/brand/${id}`,
+            await axios.delete(`/api/brand/${id}`,
                 {headers: {authorization: `Bearer ${token}`}})
             setCallBack(!callBack)
             toast.success(`You delete a brand: ${brand}`)
@@ -64,7 +64,7 @@ const Categories = () => {
                     <label htmlFor="category">Brands</label>
                     <input type="text" name="category"
                            value={brand} required onChange={(e) => setBrand(e.target.value)}/>
-                    <button type="submit">{edit ? "Update" : "Save"}</button>
+                    <button type="submit">{edit ? "Update" : "Create"}</button>
                 </form>
                 <div className="col">
                     { brands.map(item => (
