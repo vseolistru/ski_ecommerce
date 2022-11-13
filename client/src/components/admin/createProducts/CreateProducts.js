@@ -19,13 +19,13 @@ const CreateProducts = () => {
     const store = JSON.parse(localStorage.getItem('Ski&bikeLogin'))
     const token = store.token;
     const [product, setProduct] = useState(initialState);
-    const [categories, setCategories] = state.CategoriesAPI.categories;
-    const [brands, setBrands] = state.BrandsAPI.brands;
+    const [categories] = state.CategoriesAPI.categories;
+    const [brands] = state.BrandsAPI.brands;
     const [selectedImg1, setSelectedImg1] = useState('');
     const [selectedImg2, setImg2] = useState('');
     const [selectedImg3, setImg3] = useState('');
     const [size, setSize] = useState([])
-    const [body, setBody] = useState(product.description)
+
     const [callback, setCallback] = state.ProductsAPI.products;
 
     useEffect(()=>{
@@ -79,10 +79,6 @@ const CreateProducts = () => {
         setTimeout(()=> {window.location.href = '/';}, 2000)
     }
 
-
-    const handleBody = (e) =>{
-        setBody(e)
-    }
 
     return (
         <>

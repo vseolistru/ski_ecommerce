@@ -7,18 +7,21 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 
+
+
+
 class ProdControllers {
 
      async create(req, res) {
          try {
-
              const {title, category, brand, description, price, size, productId} = req.body;
              if (!title || !category || !brand || !description || !price || !productId) {
                  return res.status(403).json('Value of product`s field cannot be empty')
              }
              const {img1, img2, img3} = req.files
              if (!img1) {
-                 return res.json({message: "Images cannot be empty"}).status(500);             }
+                 return res.json({message: "Images cannot be empty"}).status(500);
+             }
 
              await img1.mv(path.resolve(__dirname, '..', 'static', img1.name));
              await img2.mv(path.resolve(__dirname, '..', 'static', img2.name));
@@ -82,31 +85,62 @@ class ProdControllers {
         }
     }
 
+
     async getAll(req, res) {
         try {
+            const PAGE_SIZE = 12
+            const page = req.query.page * 1 || 1;
+            //http://localhost:5000/api/products?page=3
+            const pageSize = req.query.pageSize || PAGE_SIZE
+             // http://localhost:5000/api/products?pageSize=16
             const qNew = req.query.new;
             const qCatId = req.query.category;
+            //http://localhost:5000/api/products?category=skies
             const qBrandId = req.query.brand;
+            //http://localhost:5000/api/products?brand=salomon
             const qSize = req.query.size;
+            //http://localhost:5000/api/products?size=192
+            const qSearch = req.query.search;
+            //http://localhost:5000/api/products?search=atomic
+            const qPriceOne = req.query.priceone;
+            const qPriceTwo = req.query.pricetwo;
+            //http://localhost:5000/api/products?priceone=10000&pricetwo=20000
             let products;
             if(qNew) {
                 products = await Product.find().sort({createdAt: -1}).limit(1);
             }
             else if (qCatId) {
-                products = await Product.find({catId:{$in:qCatId,},});
+                products = await Product.find({category:{$in:qCatId,},});
+                const countProducts = await Product.countDocuments({category:{$in:qCatId,},});
+                return res.json({products, countProducts, page, pages: Math.ceil(countProducts / pageSize)}).status(200)
             }
             else if (qBrandId) {
-                products = await Product.find({brandId: {$in: qBrandId}});
+                products = await Product.find({brand: {$in: qBrandId}});
+                const countProducts = await Product.countDocuments({brand: {$in: qBrandId}});
+                return res.json({products, countProducts, page, pages: Math.ceil(countProducts / pageSize)}).status(200)
             }
             else if (qSize) {
                 products = await Product.find({size: {$in: qSize}});
+                const countProducts = await Product.countDocuments({size: {$in: qSize}});
+                return res.json({products, countProducts, page, pages: Math.ceil(countProducts / pageSize)}).status(200)
             }
-            else{
-                products = await Product.find();
+            else if (qPriceOne) {
+                products = await Product.find({price: {$gte: qPriceOne, $lte: qPriceTwo}});
+                return res.json({products}).status(200)
             }
-            return res.json({products}).status(200)
+            else if (qSearch) {
+                products = await Product.find({title: {$regex: qSearch}});
+                const countProducts = await Product.countDocuments({title: {$regex: qSearch}});
+                return res.json({products, countProducts, page, pages: Math.ceil(countProducts / pageSize)}).status(200)
+            }
+            else {
+                products = await Product.find().skip(pageSize*(page-1)).limit(pageSize);
+                const countProducts = await Product.countDocuments();
+                return res.json({products, countProducts, page, pages: Math.ceil(countProducts / pageSize)}).status(200)
+            }
+
         } catch (e) {
-            res.status(501).json('Не выполнено')
+           res.status(501).json('Не выполнено')
         }
     }
     async getOne(req, res) {

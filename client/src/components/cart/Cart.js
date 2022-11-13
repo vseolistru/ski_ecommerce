@@ -1,11 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {State} from "../../Store";
 import {Helmet} from "react-helmet-async";
-import {Link} from "react-router-dom";
 import axios from "axios";
 import {toast} from "react-toastify";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import StripeCheckout from "react-stripe-checkout";
+
 
 const Cart = () => {
     const state = useContext(State);
@@ -267,39 +267,40 @@ const Cart = () => {
                     <label>Address</label>
                     <input type="text" required onChange={(e)=> setAddress(e.target.value)}/>
                 </form>
-            <div className="total">
-                <h3>Total: {total}</h3>
+                <div className="total">
+                    <h3>Total: {total}</h3>
+                    <span>
+                        { !name || !phone || !address || !cityAddress ? null : (<>
+                            <StripeCheckout name="Free Run Shop" currency="RUB" email={email} billingAddress shippingAddress
+                                            description="Your total is" amount={Number(total + '00')} token={onToken}
+                                            stripeKey={KEY}>
+                                <button style={{
+                                    border: "none",
+                                    width: "150px",
+                                    height: "48px",
+                                    borderRadius: 5,
+                                    padding: "15px",
+                                    backgroundColor: "black",
+                                    color: "white",
+                                    frontWeight: "600",
+                                    cursor: "pointer",
+                                    marginBottom: "10px",
+                                    fontSize: "16px",
+                                    fontWeight: "bold"
+                                }}>STRIPE pay
+                                </button>
+                            </StripeCheckout>
+                            <PayPalScriptProvider options={{"client-id": "AfxfwKRxbeU7tsVm5Jvinsktx_eT-hSa4x8ihn2Lxcf46AONdH9s-ke9dgAnCgpI04C_ljSdoAv0jebR",
+                            "currency":"RUB"}}>
+                            <PayPalButtons createOrder={createOrder} style= {{color : "gold", layout: "horizontal", height: 46}} onApprove={onApprove}/>
+                            </PayPalScriptProvider>
+                            <button type="submit" onClick={orderSubmit}>Pay Cash</button> </>)
+                        }
+                    </span>
+                </div>
 
-                <span>
-                    { !name || !phone || !address || !cityAddress ? null : (<>
-                        <StripeCheckout name="Free Run Shop" currency="RUB" email={email} billingAddress shippingAddress
-                                        description="Your total is" amount={Number(total + '00')} token={onToken}
-                                        stripeKey={KEY}>
-                            <button style={{
-                                border: "none",
-                                width: "150px",
-                                height: "48px",
-                                borderRadius: 5,
-                                padding: "15px",
-                                backgroundColor: "black",
-                                color: "white",
-                                frontWeight: "600",
-                                cursor: "pointer",
-                                marginBottom: "10px",
-                                fontSize: "16px",
-                                fontWeight: "bold"
-                            }}>STRIPE pay
-                            </button>
-                        </StripeCheckout>
-                        <PayPalScriptProvider options={{"client-id": "AfxfwKRxbeU7tsVm5Jvinsktx_eT-hSa4x8ihn2Lxcf46AONdH9s-ke9dgAnCgpI04C_ljSdoAv0jebR",
-                        "currency":"RUB"}}>
-                        <PayPalButtons createOrder={createOrder} style= {{color : "gold", layout: "horizontal", height: 46}} onApprove={onApprove}/>
-                        </PayPalScriptProvider>
-                        <button type="submit" onClick={orderSubmit}>Pay Cash</button> </>)
-                    }
-                </span>
             </div>
-            </div>
+
         </div>
     );
 };

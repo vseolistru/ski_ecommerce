@@ -1,6 +1,7 @@
 import express from "express";
 import Brand from "../models/Brands.js"
 import {verifyAdmin} from "../middleware/auth.js";
+import Product from "../models/Product.js";
 
 
 const brandRoute = express.Router();
