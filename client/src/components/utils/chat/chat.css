@@ -1,0 +1,106 @@
+.transition-3 {
+    transition: all 0.33s ease;
+    -webkit-transition: all 0.33s ease;
+    -moz-transition: all 0.33s ease;
+}
+
+.transition-5 {
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease
+}
+
+.chatWindow {
+    position: absolute;
+    width: 420px;
+    height: 530px;
+    z-index: 100;
+}
+
+.chat-button {
+    position: absolute;
+    top: 245px;
+    right: 75px;
+    background-color: #1f4f3b;
+    border-radius: 5px;
+    color: #FFFFFF;
+    border: 2px solid  #3d2727;
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 2px;
+    height: 50px;
+    width: 250px;
+    z-index: 1000;
+}
+
+.send-message {
+    position: absolute;
+    top: 465px;
+    right: 15px;
+    background-color: #1f4f3b;
+    border-radius: 50%;
+    color: #FFFFFF;
+    border: 2px solid  #3d2727;
+    height: 50px;
+    width: 50px;
+}
+.back {
+    position: absolute;
+    top: 35px;
+    right: 15px;
+    background-color: #3d2727;
+    border-radius: 50%;
+    color: #FFFFFF;
+    border: 2px solid  #3d2727;
+    height: 50px;
+    width: 50px;
+}
+.input-message {
+    position: absolute;
+    top: 455px;
+    right: 85px;
+    width: 300px;
+    height: 60px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.messages {
+    max-width: 320px;
+    margin-left: 10px;
+    height: 380px;
+    overflow-y: auto;
+    margin-top: 40px;
+}
+
+.message {
+    height: 18px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+    margin-left: 10px;
+    /*-webkit-transform: rotate(-180deg);*/
+    /*-moz-transform: rotate(-180deg);*/
+}
+.message span {
+    margin-left: 30px;
+}
+.admin {
+    background-color: rgba(209,209,5,0.33);
+    border-radius: 5px;
+    /*-webkit-transform: rotate(-180deg);*/
+    /*-moz-transform: rotate(-180deg);*/
+
+}
+
+.user {
+    background-color: rgba(209, 107, 5, 0.33);
+    border-radius: 5px;
+    /*-webkit-transform: rotate(-180deg);*/
+    /*-moz-transform: rotate(-180deg);*/
+    height: 40px;
+
+}
+
+.connection_message span {
+    margin-top: 3px;
+}

@@ -18,6 +18,7 @@ import OrdersDetails from "../admin/OrdersDetails";
 import Categories from "../admin/categories/Categories";
 import Brands from "../admin/categories/Brands";
 import CreateProducts from "../admin/createProducts/CreateProducts";
+import SupportChatBook from "../admin/support/SupportChatBook";
 
 
 
@@ -47,6 +48,7 @@ const Pages = () => {
             {isAdmin ? <Route path ='/brands' exact element={<Brands/>}/>: null}
             {isAdmin ? <Route path = '/createproducts' exact element={<CreateProducts/>}/> : null }
             {isAdmin ? <Route path = '/edit/:slug' exact element={<CreateProducts/>}/> : null }
+            {isAdmin ? <Route path = '/support' exact element={<SupportChatBook/>}/> : null }
             <Route path ='*' exact element={<NotFound/>}/>
         </Routes>
     );

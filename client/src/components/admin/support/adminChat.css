@@ -1,0 +1,98 @@
+.chat {
+    display: block;
+    height: 100%;
+    position: relative;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+    overflow-y: auto;
+
+}
+
+.admin-messages{
+    position: relative;
+    top: -100px;
+    max-width: 520px;
+    margin-left: 420px;
+    margin-top: -40px;
+    height: 500px;
+    overflow-y: auto;
+    /*-webkit-transform: rotate(-180deg);*/
+    /*-moz-transform: rotate(-180deg);*/
+}
+
+.admin-messages span {
+    margin-left: 100px;
+}
+
+.admin {
+    margin-left: 30px;
+    background-color: rgba(164, 164, 20, 0.33);
+    border-radius: 5px;
+    height: 35px;
+    /*-webkit-transform: rotate(-180deg);*/
+    /*-moz-transform: rotate(-180deg);*/
+}
+
+.user {
+    background-color: rgba(209, 107, 5, 0.33);
+    border-radius: 5px;
+    /*-webkit-transform: rotate(-180deg);*/
+    /*-moz-transform: rotate(-180deg);*/
+}
+
+.admin-message{
+    height: 40px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+    margin-left: 10px;
+    /*-webkit-transform: rotate(-180deg);*/
+    /*-moz-transform: rotate(-180deg);*/
+}
+
+.admin-chat {
+    display: flex;
+    justify-content: center;
+    background-color: #1f4f3b;
+    border-radius: 5px;
+    color: #FFFFFF;
+    border: 2px solid  #3d2727;
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 2px;
+    max-width: 120px;
+    height: 40px;
+    margin-top: 3px;
+
+}
+
+.admin-chat span{
+    flex-wrap: wrap;
+    cursor: pointer;
+    margin-top: 3px;
+
+}
+
+.form-bottom{
+    position: absolute;
+    bottom: 380px;
+    left: 1400px
+}
+.form-bottom button{
+    background-color: #1f4f3b;
+    border-radius: 50%;
+    color: #FFFFFF;
+    border: 2px solid  #3d2727;
+    height: 50px;
+    width: 50px;
+    margin-right: 20px;
+}
+
+.form-bottom textarea {
+    position: absolute;
+    bottom: 0px;
+    right: 100px;
+    border-radius: 5px;
+    font-size: 18px;
+    width: 500px;
+    height: 60px;
+}

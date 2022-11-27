@@ -146,6 +146,16 @@ class UserControllers {
         }
     }
 
+    async getAll(req, res) {
+        try{
+            const users = await User.find()
+            res.json(users).status(200);
+        }
+        catch (e) {
+            return res.json({message: e}).status(500);
+        }
+    }
+
 }
 //({message: 'Cart added to user'})
 export default new UserControllers();

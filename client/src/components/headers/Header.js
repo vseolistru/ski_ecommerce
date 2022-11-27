@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {State} from "../../Store";
 import Menu from "./icon/menu.svg";
 import Cart from "./icon/cart.svg"
@@ -27,6 +27,21 @@ const Header = () => {
     const getSearch = value.ProductsAPI.getSearch
     const [search, setSearch] = useState('search-hidden')
     const [price, setPrice] = useState("price-hidden")
+
+    const ref = useRef(null)
+
+    //hide side bar by outside click
+    useEffect(()=>{
+        function handleClick (e) {
+            if (ref.current && !ref.current.contains(e.target)) {
+                setSidebarIsOpen('side-navbar-hidden')
+            }
+        }
+        document.addEventListener("mousedown", handleClick)
+        return ()=>{
+            document.removeEventListener("mousedown", handleClick)
+        }
+    },[ref])
 
     const { getTrackProps, handles } = useRanger({
         min: 2000,
@@ -113,17 +128,17 @@ const Header = () => {
     }
 
     return (
-        <header>
+        <header ref={ref}>
             <div className="menu">
                 <button onClick={menuHandler}>
                     <img src={Menu} alt ="" width="30"/>
                 </button>
             </div>
             <div
-                className={sidebarIsOpen }
+                className={sidebarIsOpen}
             >
                 <div className="">
-                    <div className="category-name">
+                    <div className="category-name" ref = {ref}>
                         <strong onClick={categoriesHandler}>Categories: {categories.length}</strong>
                         <p onClick={categoriesHandler}>Products: {catsResult}</p>
                         <span onClick={menuHandler}>X</span>
