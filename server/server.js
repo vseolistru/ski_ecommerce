@@ -14,7 +14,6 @@ import productRouter from "./routes/productRouter.js";
 import stripeRoute from "./routes/stripe.js";
 import orderRoute from "./routes/orderRoutes.js";
 import restoreRoute from "./routes/restoreRouter.js";
-import { WebSocketServer } from 'ws'
 import { Server } from "socket.io";
 import Message from "./models/Messages.js";
 import User from "./models/User.js";
@@ -82,7 +81,6 @@ async function getLastMessagesFromRoom(qFrom, qTo){
 
 
 io.on('connection', (socket)=> {
-
 
     socket.on('user', async (id) => {
         //console.log(socket.id)

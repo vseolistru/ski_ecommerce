@@ -44,7 +44,7 @@ brandRoute.delete('/:id', verifyAdmin, async (req, res)=>{
 brandRoute.put('/:id', verifyAdmin, async (req, res) => {
     try {
         const {name} = req.body;
-        console.log(name)
+
         await Brand.findByIdAndUpdate(
             {_id: req.params.id}, {name})
         const newName = await Brand.find({_id: req.params.id})

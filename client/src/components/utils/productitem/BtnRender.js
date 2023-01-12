@@ -11,7 +11,7 @@ const BtnRender = ({product, sizes, deleteProduct}) => {
         <div className="row_btn">
             {isAdmin
                 ? <>
-                    <Link to="#" id="btn_buy" onClick={deleteProduct}>
+                    <Link to="#" id="btn_buy" onClick={deleteProduct} name={product.slug}>
                         Delete
                     </Link>
                     <Link to={`/edit/${product.slug}`} id="btn_view">
@@ -19,7 +19,7 @@ const BtnRender = ({product, sizes, deleteProduct}) => {
                     </Link>
                 </>
                 : <>
-                    <Link to="#" id="btn_buy" onClick={()=>{addToCart(product, sizes)}}>
+                    <Link to="#" name={product.slug} id="btn_buy" onClick={()=>{addToCart(product, sizes)}}>
                         Buy
                     </Link>
                     <Link to={`/${product.slug}`} id="btn_view">

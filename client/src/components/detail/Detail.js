@@ -2,8 +2,10 @@ import React, {useContext, useEffect, useState} from 'react';
 import {State} from "../../Store";
 import {Link, useParams} from "react-router-dom";
 import {Helmet} from "react-helmet-async";
-import { Carousel } from 'react-carousel-minimal';
 import ProductItem from "../utils/productitem/ProductItem";
+import Slider from "./detailcomponents/Slider";
+import Sizes from "./detailcomponents/Sizes";
+import Related from "./detailcomponents/Related";
 
 
 const Detail = () => {
@@ -32,14 +34,11 @@ const Detail = () => {
         {image: detail.img2, caption: detail.slug},
         {image: detail.img3, caption: detail.slug},
     ];
-    const captionStyle = {
-        fontSize: '1.4em',
-        fontWeight: 'bold',
+
+    const setFnSizes = (size) => {
+        setSelectedSizes(size)
     }
-    const slideNumberStyle = {
-        fontSize: '20px',
-        fontWeight: 'bold',
-    }
+
 
     return (
         <>
@@ -47,65 +46,19 @@ const Detail = () => {
                 <Helmet>
                     <title>{`SKI & BIKE STORE - `+ detail.slug }</title>
                 </Helmet>
-                <Carousel
-                    data={data}
-                    time={9000}
-                    width="850px"
-                    height="500px"
-                    captionStyle={captionStyle}
-                    radius="10px"
-                    slideNumber={true}
-                    slideNumberStyle={slideNumberStyle}
-                    captionPosition="bottom"
-                    automatic={true}
-                    dots={true}
-                    pauseIconColor="white"
-                    pauseIconSize="40px"
-                    slideBackgroundColor="white"
-                    slideImageFit="cover"
-                    thumbnails={true}
-                    thumbnailWidth="100px"
-                    style={{
-                        textAlign: "center",
-                        maxWidth: "850px",
-                        maxHeight: "500px",
-                        marginLeft: "10px",
-                    }}
-                />
+                <Slider data={data}/>
                 <div className="box-detail">
                     <div className="row">
                         <h1>{detail.title}</h1>
                     </div>
                     <span>{detail.price}p.</span>
-                    <form>
-                        {sizes.map((item, i)=>(
-                            <label key={i}>{item}<input type="radio" id="radio" name="sizes" value={item}
-                                                         onChange={(e)=>setSelectedSizes(e.target.value)}/></label>
-                        ))}
-                    </form>
+                    <Sizes sizes={sizes} setFnSizes={setFnSizes}/>
                     <p>{detail.description}</p>
                     <p>Sold: {detail.sold}</p>
                     <Link to ="#" className="cart" onClick={()=>{addToCart(detail, selectedSizes)}}>Buy Now</Link>
                 </div>
             </div>
-            <div>
-                <h2>Related by category</h2>
-                <div className="products">
-                    {products.map(product => (
-                        product.category === detail.category
-                            ? (<ProductItem key={product.slug} product={product}/>)
-                            : (null)
-                    ))}
-                </div>
-                <h2>Related by brand</h2>
-                <div className="products">
-                    {products.map(product=>{
-                        return product.brand === detail.brand
-                            ? <ProductItem key={product.slug} product={product}/>
-                            : null
-                    })}
-                </div>
-            </div>
+            <Related products={products} detail={detail}/>
         </>
     );
 };

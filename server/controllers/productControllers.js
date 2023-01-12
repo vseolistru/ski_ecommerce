@@ -8,8 +8,6 @@ const __dirname = dirname(__filename);
 
 
 
-
-
 class ProdControllers {
 
      async create(req, res) {

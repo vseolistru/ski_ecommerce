@@ -97,7 +97,7 @@ header input {
 }
 
 .side-navbar {
-    margin-top: 730px;
+    top: 5px;
     width: 400px;
     height: 150%;
     position: absolute;

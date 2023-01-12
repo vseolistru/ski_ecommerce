@@ -149,7 +149,8 @@ const CreateProducts = () => {
                                    id="size" required onChange={e=>setSize(e.target.value.split(','))}/>
                         </div>
                         <div className="row">
-                            {params.slug ? <label htmlFor="categories" style={{color:"orange"}}>Category: {product.category}</label>
+                            {params.slug ? <label htmlFor="categories" style={{color:"orange"}}>
+                                    Category: {product.category}</label>
                                 : <label htmlFor="categories">Category</label>}
                             <select name="category"
                                     id="categories" required onChange={handleChangeInput}>
@@ -160,7 +161,8 @@ const CreateProducts = () => {
                             </select>
                         </div>
                         <div className="row">
-                            {params.slug ? <label htmlFor="brands" style={{color:"orange"}}>Brands: {product.brand}</label> :
+                            {params.slug ? <label htmlFor="brands" style={{color:"orange"}}>
+                                    Brands: {product.brand}</label> :
                                 <label htmlFor="brands">Brands</label>}
                             <select name="brand"
                                     id="brands" required onChange={handleChangeInput}>

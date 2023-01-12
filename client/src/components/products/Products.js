@@ -12,7 +12,7 @@ const Products = () => {
     const [numberOfPages] = state.ProductsAPI.numberOfPages
     const gotoPrevious = state.ProductsAPI.gotoPrevious
     const numsOfPages = new Array(numberOfPages).fill(null).map((v, i) => i);
-   const [isAdmin, setIsAdmin] = state.userApi.isAdmin
+    const [isAdmin, setIsAdmin] = state.userApi.isAdmin
 
 
     return (
