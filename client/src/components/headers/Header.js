@@ -3,11 +3,11 @@ import {State} from "../../Store";
 import Menu from "./icon/menu.svg";
 import Cart from "./icon/cart.svg"
 import {Link} from "react-router-dom";
-import { useRanger } from "react-ranger";
 import SizeSubMenu from "./menucomponents/SizeSubMenu";
 import PriceSubMenu from "./menucomponents/PriceSubMenu";
 import SearchSubMenu from "./menucomponents/SearchSubMenu";
 import CategorySubMenu from "./menucomponents/CategorySubMenu";
+import BrandsSubMenu from "./menucomponents/BrandsSubMenu";
 
 
 const Header = () => {
@@ -19,11 +19,18 @@ const Header = () => {
     const [sidebarIsOpen, setSidebarIsOpen] = useState("side-navbar-hidden");
     const [categoryMenu, setCategoryMenu] = useState("category-menu-hidden ")
 
-    const [brands] = value.BrandsAPI.brands
-    const [brandsMenu, setBrandsMenu] = useState("brands-menu-hidden ")
-    const getBrands = value.ProductsAPI.getBrands
-    const [brandsResult] = value.ProductsAPI.brandsResult
 
+    useEffect(()=>{
+        function handleClick (e) {
+            if (ref.current && !ref.current.contains(e.target)) {
+                setSidebarIsOpen('side-navbar-hidden')
+            }
+        }
+        document.addEventListener("mousedown", handleClick)
+        return ()=>{
+            document.removeEventListener("mousedown", handleClick)
+        }
+    },[ref])
 
     const menuHandler = () =>{
         if (sidebarIsOpen === "side-navbar-hidden") {
@@ -32,16 +39,6 @@ const Header = () => {
         }
         else {
             setSidebarIsOpen("side-navbar-hidden")
-        }
-    }
-
-    const brandsHandler = () => {
-        if (brandsMenu === "brands-menu-hidden") {
-            setBrandsMenu("category-menu" )
-        }
-        else {
-            setBrandsMenu("brands-menu-hidden")
-            getBrands('')
         }
     }
 
@@ -69,30 +66,10 @@ const Header = () => {
             </div>
             <div className={sidebarIsOpen} >
                 <CategorySubMenu setSidebarIsOpen={setSidebarIsOpen} menuHandler={menuHandler}/>
-                <div className="">
-                    <div className="category-name">
-                        <strong onClick={brandsHandler}>Brands: {brands.length}</strong>
-                        <p onClick={brandsHandler}>Products: {brandsResult}</p>
-                    </div>
-                    {brands.map((brand) => (
-                        <div className={brandsMenu} key={brand._id}>
-                            <button className="" onClick={()=>getBrands(brand.name)}>
-                                {brand.name.replace(/_/, ' ')}
-                            </button>
-                        </div>
-
-                    ))}
-                    <div className="drop-filter">
-                        <button className={brandsMenu} style={{marginBottom:"10px"}}
-                                onClick={()=>getBrands('')}>Drop Brands</button>
-                    </div>
-                </div>
-
-                <SizeSubMenu />
-                <PriceSubMenu />
+                <BrandsSubMenu/>
+                <SizeSubMenu/>
+                <PriceSubMenu/>
                 <SearchSubMenu/>
-
-
             </div>
 
             <div className="logo">

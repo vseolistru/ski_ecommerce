@@ -2,7 +2,6 @@ import React, {useContext, useEffect, useState} from 'react';
 import {State} from "../../Store";
 import {Link, useParams} from "react-router-dom";
 import {Helmet} from "react-helmet-async";
-import ProductItem from "../utils/productitem/ProductItem";
 import Slider from "./detailcomponents/Slider";
 import Sizes from "./detailcomponents/Sizes";
 import Related from "./detailcomponents/Related";

@@ -6,6 +6,11 @@ const SizeSubMenu = () => {
     const value = useContext(State)
     const getSize = value.ProductsAPI.getSize  //Sizes
     const [sizesMenu, setSizesMenu] = useState("sizes-menu-hidden ") //Sizes
+    const skiSizes = [183,186,191,192]
+    const bikeSizes = [54,56,58,60]
+    const polesSizes = [145,150,155,160,165,170,175]
+    const mensShoesSize = [40,41,42,43,44,45,46]
+    const glovesSizes = [6,7,8,9,10,11,12]
     const sizesHandler = () => {         // Sizes
         if (sizesMenu === "sizes-menu-hidden") {
             setSizesMenu("category-menu" )
@@ -24,44 +29,35 @@ const SizeSubMenu = () => {
             </div>
             <div className={sizesMenu}>
                 <p>Skies:</p>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(183)}>183</button>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(186)}>186</button>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(191)}>191</button>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(192)}>192</button>
+                {skiSizes.map((item, idx) =>
+                    <button style={{width:"50px",marginLeft:"3px"}}
+                            onClick={()=>getSize(item)} key={idx}>{item}</button>)}
             </div>
             <div className={sizesMenu}>
                 <p>Bikes:</p>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(54)}>54</button>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(56)}>56</button>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(58)}>58</button>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(60)}>60</button>
+                {bikeSizes.map((item, idx)=>
+                    <button style={{width:"50px",marginLeft:"3px"}} key={idx}
+                            onClick={()=>getSize(item)}>{item}</button>)}
             </div>
             <div className={sizesMenu}>
                 <p>Poles:</p>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(155)}>155</button>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(155)}>165</button>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(155)}>175</button>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(155)}>180</button>
+                {polesSizes.map((item, idx)=>
+                    <button style={{width:"50px",marginLeft:"3px"}} key={idx}
+                            onClick={()=>getSize(item)}>{item}</button>)}
+
             </div>
             <div className={sizesMenu}>
                 <p>Boots:</p>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(40)}>40</button>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(41)}>41</button>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(42)}>42</button>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(43)}>43</button>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(44)}>44</button>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(45)}>45</button>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(46)}>46</button>
+                {mensShoesSize.map((item, idx) =>
+                    <button style={{width:"50px",marginLeft:"3px"}} key={idx}
+                            onClick={()=>getSize(item)}>{item}</button>)}
             </div>
             <div className={sizesMenu}>
                 <p>Gloves:</p>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(6)}>6</button>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(7)}>7</button>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(8)}>8</button>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(9)}>9</button>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(10)}>10</button>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(11)}>11</button>
-                <button style={{width:"50px",marginLeft:"3px"}} onClick={()=>getSize(12)}>12</button>
+                {glovesSizes.map((item,idx)=>
+                    <button style={{width:"50px",marginLeft:"3px"}} key={idx}
+                            onClick={()=>getSize(item)}>{item}</button>)}
+
             </div>
             <div className="drop-filter">
                 <button className={sizesMenu} style={{marginBottom:"10px"}}

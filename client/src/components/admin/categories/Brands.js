@@ -6,7 +6,7 @@ import {State} from "../../../Store";
 import {getError} from "../../utils/error";
 
 const Categories = () => {
-    const  state  = useContext(State);
+    const state  = useContext(State);
     const store = JSON.parse(localStorage.getItem('Ski&bikeLogin'))
     const token = store.token;
     const [brands, setBrands] = state.BrandsAPI.brands

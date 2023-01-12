@@ -6,9 +6,9 @@ const CategorySubMenu = ({setSidebarIsOpen, menuHandler}) => {
     const value = useContext(State)
     const [catsResult] = value.ProductsAPI.catsResult
     const getCategory = value.ProductsAPI.getCategory
-    const ref = useRef(null)
     const [categoryMenu, setCategoryMenu] = useState("category-menu-hidden ")
     const [categories] = value.CategoriesAPI.categories
+    const ref = useRef(null)
 
     //hide side bar by outside click
     useEffect(()=>{
@@ -22,7 +22,6 @@ const CategorySubMenu = ({setSidebarIsOpen, menuHandler}) => {
             document.removeEventListener("mousedown", handleClick)
         }
     },[ref])
-
     const categoriesHandler = () => {
         if (categoryMenu === "category-menu-hidden") {
             setCategoryMenu("category-menu" )
@@ -35,7 +34,9 @@ const CategorySubMenu = ({setSidebarIsOpen, menuHandler}) => {
 
     return (
         <div className="">
-            <div className="category-name" ref = {ref}>
+            <div className="category-name"
+                  // ref = {ref}
+            >
                 <strong onClick={categoriesHandler}>Categories: {categories.length}</strong>
                 <p onClick={categoriesHandler}>Products: {catsResult}</p>
                 <span onClick={menuHandler}>X</span>
