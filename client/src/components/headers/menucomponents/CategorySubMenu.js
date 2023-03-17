@@ -32,6 +32,7 @@ const CategorySubMenu = ({setSidebarIsOpen, menuHandler}) => {
         }
     }
 
+
     return (
         <div className="">
             <div className="category-name"

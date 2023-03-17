@@ -8,10 +8,13 @@ import PriceSubMenu from "./menucomponents/PriceSubMenu";
 import SearchSubMenu from "./menucomponents/SearchSubMenu";
 import CategorySubMenu from "./menucomponents/CategorySubMenu";
 import BrandsSubMenu from "./menucomponents/BrandsSubMenu";
+import axios from "axios";
+
 
 
 const Header = () => {
     const value = useContext(State)
+    const [token] = value.token
     const store = JSON.parse(localStorage.getItem('Ski&bikeLogin'))
     const ref = useRef(null)
     const [cart, setCart] = value.userApi.cart;
@@ -19,6 +22,13 @@ const Header = () => {
     const [sidebarIsOpen, setSidebarIsOpen] = useState("side-navbar-hidden");
     const [categoryMenu, setCategoryMenu] = useState("category-menu-hidden ")
 
+    const handleUpdateUserState = async () =>{
+        const {data} = await axios.get(`/api/users/infor/${store._id}`,
+        {headers: {authorization: `Bearer ${token}`}})
+        const {isActivated, role, ...toStore} = data
+        localStorage.setItem('Ski&bikeLogin', JSON.stringify(toStore));
+        window.location.href = '/cart';
+    }
 
     useEffect(()=>{
         function handleClick (e) {
@@ -89,7 +99,7 @@ const Header = () => {
                         <li className="user-name dropdown">
                             admin: <span>{store.name}</span>
                             <div className="dropdown-content">
-                                <Link to="/login" onClick={signOutHandler}>Logout</Link>
+                                <Link to="/login" onClick={()=>signOutHandler}>Logout</Link>
                             </div>
                         </li>
                     </>)
@@ -109,10 +119,14 @@ const Header = () => {
                 {/*<li><img src={Close} alt='' width="30" className="menu"/> </li>*/}
 
             </ul>
-            {isAdmin ? <Link to={"/orders"} className="cart-icon">Orders</Link>
+            {isAdmin ? <Link to={"/orders"}
+                className="cart-icon"
+              >
+                Orders
+              </Link>
             : <div className="cart-icon">
                     {! cart ? null : <span>{cart.length}</span>}
-                <Link to={'/cart'}>
+                <Link to={'/cart'} onClick={handleUpdateUserState}>
                     <img src ={Cart} alt='' width='30'/>
                 </Link>
             </div>}

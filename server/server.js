@@ -17,8 +17,8 @@ import restoreRoute from "./routes/restoreRouter.js";
 import { Server } from "socket.io";
 import Message from "./models/Messages.js";
 import User from "./models/User.js";
-import chatRoute from "./routes/chatRoutes.js";
 import Messages from "./models/Messages.js";
+
 
 
 dotenv.config();
@@ -44,7 +44,7 @@ app.use('/api/products', productRouter);
 app.use('/api/checkout', stripeRoute);
 app.use('/api/orders', orderRoute);
 app.use('/api/user', restoreRoute);
-app.use('/api/chat', chatRoute);
+
 
 
 

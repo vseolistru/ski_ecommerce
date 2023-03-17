@@ -57,6 +57,7 @@
 .forgot input {
     position: center;
     margin-top: 50px;
+    width: 120%;    
 }
 
 .verify {

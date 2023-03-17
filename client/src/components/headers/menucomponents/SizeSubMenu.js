@@ -6,11 +6,13 @@ const SizeSubMenu = () => {
     const value = useContext(State)
     const getSize = value.ProductsAPI.getSize  //Sizes
     const [sizesMenu, setSizesMenu] = useState("sizes-menu-hidden ") //Sizes
+
     const skiSizes = [183,186,191,192]
     const bikeSizes = [54,56,58,60]
     const polesSizes = [145,150,155,160,165,170,175]
     const mensShoesSize = [40,41,42,43,44,45,46]
     const glovesSizes = [6,7,8,9,10,11,12]
+
     const sizesHandler = () => {         // Sizes
         if (sizesMenu === "sizes-menu-hidden") {
             setSizesMenu("category-menu" )
@@ -21,6 +23,7 @@ const SizeSubMenu = () => {
 
         }
     }
+
 
     return (
         <div className="">

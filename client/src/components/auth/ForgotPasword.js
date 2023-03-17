@@ -3,6 +3,7 @@ import {Helmet} from "react-helmet-async";
 import axios from "axios";
 import {toast} from "react-toastify";
 import {getError} from "../utils/error";
+import {Link} from "react-router-dom";
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('')
@@ -35,7 +36,10 @@ const ForgotPassword = () => {
                 <label>Email</label>
                 <input type="email" name="email" required
                        placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
-                <button type="submit">Reset Password</button>
+               <div className = 'row'>
+                    <button type="submit">Reset</button>
+                    <Link to={"/login"}>Login</Link>
+                </div>
                 </form>
         </div>
     );

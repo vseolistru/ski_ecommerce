@@ -4,7 +4,6 @@ import {Helmet} from "react-helmet-async";
 import axios from "axios";
 import {toast} from "react-toastify";
 import {useParams} from "react-router-dom";
-import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 const initialState = {

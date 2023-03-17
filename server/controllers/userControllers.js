@@ -4,6 +4,7 @@ import {v4} from 'uuid';
 import mailService from "../middleware/mailService/mailService.js";
 import jwt from 'jsonwebtoken';
 
+
 const strongPassword = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})");
 const emailValidator = new RegExp("^([A-Za-z0-9_\\-\\.])+\\@([A-Za-z0-9_\\-\\.])+\\.([A-Za-z]{2,4})");
 
@@ -19,10 +20,11 @@ class UserControllers {
 
     async registration(req, res) {
         try {
-            const {name, email, role ,password} = req.body;
+
+            const {name, email, role ,password} = req.body;            
 
             if (!email || !password || !name) {
-                return res.status(403).json({message:'Значения полей username, email и password не должны быть пустыми'})
+                return res.status(403).json({message:'Значения полей name, email и password не должны быть пустыми'})
             }
             if (!emailValidator.test(email)) {
                 return res.status(403).json({message:'Email должен содержать - @ и домен'})
@@ -77,11 +79,11 @@ class UserControllers {
             const activationLink = req.params.link
             const  userLink = await User.findOne({activationLink})
             if(!userLink){
-                res.status(500).json('Некорректная ссылка')
+                return res.status(500).json({message: 'Incorrect link'})
             }
             userLink.isActivated = true
             await userLink.save()
-            return res.redirect('http://localhost:5000/')
+            return res.redirect(`${process.env.API_URL}/`)
         }
         catch (e){
             res.status(500).json({message:'is not saved'})
@@ -118,13 +120,14 @@ class UserControllers {
             res.status(500).json({message: e.message})
         }
     }
+
     async getOne(req, res) {
         try {
             const user = await User.findById({_id: req.params.id}).select('-password')
             if (!user) {
                 return res.status(404).json({message:'User is not found'})
             }
-            return res.json({...user._doc,})
+            return res.json({...user._doc,}).status(200)
         } catch (e) {
             res.status(500).json({msg: e.msg})
         }
@@ -134,13 +137,15 @@ class UserControllers {
         try{
             const {cart} = req.body
             const user = await User.findById({_id: req.params.id})
-            if(user) {
-                await User.findByIdAndUpdate({_id: req.params.id}, {cart})
-                res.status(200).json({user})
-            }
-            else {
+            if(!user) {
                 return res.status(404).json({message:'User is not found'})
             }
+            await User.findByIdAndUpdate({_id: req.params.id}, {cart})
+            const updateUser = await User.findById({_id: req.params.id}).select('-password')
+            return res.status(200).json({...updateUser._doc})
+            
+                
+            
         }catch (e) {
             res.status(500).json({message: e.message})
         }

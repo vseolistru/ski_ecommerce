@@ -108,3 +108,6 @@
     height: 500px;
     background: #C29254;
 }
+.box-detail h2 {
+    text-transform: uppercase;
+}

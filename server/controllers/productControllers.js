@@ -93,7 +93,7 @@ class ProdControllers {
              // http://localhost:5000/api/products?pageSize=16
             const qNew = req.query.new;
             const qCatId = req.query.category;
-            //http://localhost:5000/api/products?category=skies
+            //http://localhost:5000/api/products?category=ski
             const qBrandId = req.query.brand;
             //http://localhost:5000/api/products?brand=salomon
             const qSize = req.query.size;

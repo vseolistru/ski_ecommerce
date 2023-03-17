@@ -58,8 +58,9 @@ const Register = () => {
 
                 <div className="row">
                     <button type="submit">Register</button>
-                    <Link to={"/register"}>Login</Link>
+                    <Link to={"/login"}>Login</Link>
                 </div>
+                
             </form>
         </div>
     );

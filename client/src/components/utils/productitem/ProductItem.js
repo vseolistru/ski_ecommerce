@@ -41,7 +41,7 @@ const ProductItem = ({product, isAdmin}) => {
     if (loading) return <Loading/>
 
     return (
-        <div className="product-card">
+        <div className="product-card" data-set = {product.title}>
             <img src={product.img1} alt={product.slug} title={product.slug} />
             <div className="product_box">
                 <h1 title={product.title} >{product.title}</h1>

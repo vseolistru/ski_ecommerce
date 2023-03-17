@@ -14,7 +14,6 @@ const Cart = () => {
     const [cart,setCart] = state.userApi.cart;
     const store = JSON.parse(localStorage.getItem('Ski&bikeLogin'));
     const [total, setTotal] = useState(0);
-
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [cityAddress, setCityAddress] = useState('');
@@ -100,7 +99,7 @@ const Cart = () => {
                     </Helmet>
                     <img src={product.img1} alt = {product.slug} title={product.slug} className="img-container"/>
                     <div className="box-detail">
-                        <h1>{product.title}</h1>
+                        <h2>{product.title}</h2>
                         <span>Price: {product.price}p.</span>
                         <h3>Size: {product.sizesToSell}</h3>
                         <div className="amount">
